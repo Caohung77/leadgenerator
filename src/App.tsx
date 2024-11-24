@@ -254,39 +254,27 @@ function App() {
                 <h2 className="title is-3 has-text-centered mb-6">Häufig gestellte Fragen</h2>
                 <div className="columns is-multiline">
                   <div className="column is-6">
-                    <div className="box faq-box">
-                      <h3 className="title is-4 mb-4">Was bedeutet Leads generieren?</h3>
-                      <p>
-                        Leads generieren bezieht sich auf den Prozess, potenzielle Kunden zu 
-                        identifizieren und ihre Kontaktdaten zu sammeln.
-                      </p>
+                    <div className="faq-section">
+                      <h3 className="faq-question">Was bedeutet Leads generieren?</h3>
+                      <p>Leads generieren bedeutet, potenzielle Kunden für dein Unternehmen zu finden und deren Kontaktdaten zu sammeln.</p>
                     </div>
                   </div>
                   <div className="column is-6">
-                    <div className="box faq-box">
-                      <h3 className="title is-4 mb-4">Wie funktioniert das Tool?</h3>
-                      <p>
-                        Unser Tool analysiert Deine Anforderungen und liefert gezielte Leads 
-                        von Branchen oder Services in Deiner Region.
-                      </p>
+                    <div className="faq-section">
+                      <h3 className="faq-question">Wie funktioniert die Lead-Generierung?</h3>
+                      <p>Wir durchsuchen das Internet nach Unternehmen, die zu deinen Kriterien passen, und stellen dir deren Kontaktdaten zur Verfügung.</p>
                     </div>
                   </div>
                   <div className="column is-6">
-                    <div className="box faq-box">
-                      <h3 className="title is-4 mb-4">Ist der Service DSGVO-konform?</h3>
-                      <p>
-                        Ja, unser Service ist vollständig DSGVO-konform und erfüllt alle 
-                        Datenschutzanforderungen in der DACH-Region.
-                      </p>
+                    <div className="faq-section">
+                      <h3 className="faq-question">Welche Informationen erhalte ich?</h3>
+                      <p>Du erhältst relevante Geschäftskontakte inklusive E-Mail-Adressen, die zu deiner Zielgruppe passen.</p>
                     </div>
                   </div>
                   <div className="column is-6">
-                    <div className="box faq-box">
-                      <h3 className="title is-4 mb-4">Wie schnell erhalte ich meine Leads?</h3>
-                      <p>
-                        Nach Deiner Anfrage erhältst Du innerhalb weniger Minuten eine 
-                        kuratierte Liste mit relevanten Geschäftskontakten.
-                      </p>
+                    <div className="faq-section">
+                      <h3 className="faq-question">Wie kann ich die Leads nutzen?</h3>
+                      <p>Du kannst die Leads für deine B2B-Kommunikation, Marketingkampagnen oder direkte Geschäftsanbahnungen nutzen.</p>
                     </div>
                   </div>
                 </div>

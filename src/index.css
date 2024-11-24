@@ -384,6 +384,17 @@
   color: var(--primary-color) !important;
 }
 
+.faq-question {
+  color: #666666 !important;
+  font-weight: 500;
+  margin-bottom: 0.5rem;
+}
+
+.faq-section h3 {
+  color: #666666 !important;
+  font-weight: 500;
+}
+
 /* Success Icon Styles */
 .success-icon {
   width: 64px;
