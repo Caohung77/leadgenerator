@@ -227,6 +227,16 @@
   border-color: transparent transparent #fff #fff !important;
 }
 
+.help {
+  font-size: 0.85rem;
+  margin-top: 0.5rem;
+  line-height: 1.4;
+}
+
+.help.has-text-grey {
+  color: #666 !important;
+}
+
 .help.has-text-white {
   opacity: 0.9;
 }
