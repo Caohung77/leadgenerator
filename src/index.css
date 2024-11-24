@@ -287,6 +287,19 @@
   z-index: 1;
 }
 
+.title {
+  color: #363636 !important;
+}
+
+.subtitle {
+  color: #363636 !important;
+}
+
+.section-title {
+  color: #363636 !important;
+  margin-bottom: 2rem;
+}
+
 .title.is-2 {
   font-weight: 700;
   line-height: 1.2;
