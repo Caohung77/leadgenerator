@@ -181,26 +181,26 @@ function App() {
 
             <section className="section steps-section">
               <div className="container">
-                <h2 className="title is-3 has-text-centered mb-6">So findest du deine Leads</h2>
-                <div className="columns">
+                <h2 className="steps-title title is-3">So findest du deine Leads</h2>
+                <div className="columns is-variable is-6">
                   <div className="column is-4">
                     <div className="step-box">
                       <div className="step-number">1</div>
-                      <h3 className="title is-4">Branche wählen</h3>
+                      <h3>Branche wählen</h3>
                       <p>Wähle die Branche oder den Service aus, für den du Leads generieren möchtest.</p>
                     </div>
                   </div>
                   <div className="column is-4">
                     <div className="step-box">
                       <div className="step-number">2</div>
-                      <h3 className="title is-4">Region festlegen</h3>
+                      <h3>Region festlegen</h3>
                       <p>Gib die Region oder Stadt an, in der du nach Leads suchen möchtest.</p>
                     </div>
                   </div>
                   <div className="column is-4">
                     <div className="step-box">
                       <div className="step-number">3</div>
-                      <h3 className="title is-4">Leads erhalten</h3>
+                      <h3>Leads erhalten</h3>
                       <p>Erhalte sofort eine Liste mit relevanten Geschäftskontakten per E-Mail.</p>
                     </div>
                   </div>

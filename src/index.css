@@ -424,31 +424,61 @@
 /* Steps Section */
 .steps-section {
   background: white;
+  padding: 4rem 1.5rem;
 }
 
 .step-box {
   padding: 2rem;
   border-radius: 12px;
   background: white;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.02);
   transition: all 0.3s ease;
-  border: 1px solid rgba(37, 99, 235, 0.1);
+  border: 1px solid #e5e7eb;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
 }
 
 .step-box:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.08);
+  transform: translateY(-2px);
   border-color: var(--primary-color);
-  background: linear-gradient(135deg, rgba(37, 99, 235, 0.02) 0%, rgba(255, 126, 35, 0.02) 100%);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
 }
 
 .step-number {
-  font-size: 2rem;
-  font-weight: bold;
-  background: linear-gradient(135deg, var(--gradient-start), var(--gradient-end));
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: var(--primary-color);
   margin-bottom: 1rem;
+  background: rgba(255, 126, 35, 0.1);
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+}
+
+.step-box h3 {
+  color: #374151;
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin-bottom: 0.75rem;
+}
+
+.step-box p {
+  color: #6b7280;
+  font-size: 1rem;
+  line-height: 1.5;
+  margin: 0;
+}
+
+.steps-title {
+  color: #111827;
+  font-weight: 600;
+  margin-bottom: 2.5rem;
+  text-align: center;
 }
 
 /* Success Icon Styles */
