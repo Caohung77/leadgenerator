@@ -286,12 +286,11 @@ function App() {
       </section>
 
       <footer className="footer">
-        <div className="container">
-          <div className="content has-text-centered">
-            <p>
-              <strong>LeadGen</strong> - Ihre Plattform für effiziente B2B Lead-Generierung
-            </p>
-          </div>
+        <div className="content has-text-centered">
+          <p>
+            <strong>Sophiena - Leads generieren</strong>, finde Unternehmen in deiner Umgebung. 
+            Mit ♥ entwickelt von <a href="https://sophiena.com" className="has-text-orange">Sophiena</a>
+          </p>
         </div>
       </footer>
     </>
