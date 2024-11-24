@@ -296,14 +296,15 @@ function App() {
             <footer className="footer">
               <div className="content has-text-centered">
                 <p>
-                  <strong>Sophiena - Leads generieren</strong>, finde Unternehmen in deiner Umgebung. 
-                  Mit ♥ entwickelt von <a href="https://sophiena.com" className="has-text-orange">Sophiena</a>
+                  Entwickelt von <a href="https://www.theaiwhisperer.de" target="_blank" rel="noopener noreferrer">The AIWhisperer</a>
                 </p>
-                <p className="is-size-7 mt-3">
-                  <Link to="/impressum" className="has-text-grey">Impressum</Link>
-                  {" | "}
-                  <Link to="/datenschutz" className="has-text-grey">Datenschutz</Link>
-                </p>
+                <div className="footer-links">
+                  <p className="is-size-7 mt-3">
+                    <Link to="/impressum" className="has-text-grey">Impressum</Link>
+                    {" | "}
+                    <Link to="/datenschutz" className="has-text-grey">Datenschutz</Link>
+                  </p>
+                </div>
               </div>
             </footer>
           </>
