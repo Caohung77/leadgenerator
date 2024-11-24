@@ -49,8 +49,8 @@
 }
 
 .logo-image {
-  width: auto;
   height: 40px;
+  width: auto;
   object-fit: contain;
   padding: 0;
 }
@@ -60,11 +60,15 @@
 }
 
 .navbar-item img {
-  max-height: none;
+  max-height: 2.5rem;
 }
 
 .navbar-item strong {
   color: white;
+}
+
+.navbar-item:hover {
+  background-color: transparent !important;
 }
 
 .box {
@@ -78,6 +82,8 @@
 
 .input {
   transition: border-color 0.2s ease;
+  color: #4a4a4a !important;
+  background-color: white !important;
 }
 
 .input:focus {
