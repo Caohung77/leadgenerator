@@ -19,8 +19,13 @@
   }
 }
 
+:root {
+  --primary-color: #FF7E23;
+  --primary-hover: #e66a12;
+}
+
 .hero.is-primary {
-  background: linear-gradient(135deg, #4a90e2 0%, #357abd 100%);
+  background: linear-gradient(135deg, #2b4162 0%, var(--primary-color) 100%);
 }
 
 .hero.is-primary .title {
@@ -76,15 +81,18 @@
 }
 
 .input:focus {
-  box-shadow: 0 0 0 2px rgba(74, 144, 226, 0.25);
+  border-color: var(--primary-color) !important;
+  box-shadow: 0 0 0 0.125em rgba(255, 126, 35, 0.25) !important;
 }
 
 .button.is-primary {
-  background: linear-gradient(135deg, #4a90e2 0%, #357abd 100%);
+  background-color: var(--primary-color) !important;
+  border-color: transparent;
+  color: #fff !important;
 }
 
 .button.is-primary:hover {
-  background: linear-gradient(135deg, #357abd 0%, #2d6aa6 100%);
+  background-color: var(--primary-hover) !important;
 }
 
 .button.is-white {
@@ -142,6 +150,8 @@
   border-radius: 16px;
   padding: 3rem;
   box-shadow: 0 15px 50px rgba(0, 0, 0, 0.15);
+  border-top: 4px solid var(--primary-color);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
 .form-header {
@@ -169,8 +179,8 @@
 }
 
 .custom-input:focus {
-  border-color: #4a90e2;
-  box-shadow: 0 0 0 1px rgba(74, 144, 226, 0.1);
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 1px rgba(255, 126, 35, 0.1);
 }
 
 .custom-input:hover {
@@ -193,11 +203,13 @@
   font-weight: 600;
   font-size: 1.1rem;
   transition: all 0.2s ease;
+  background-color: var(--primary-color) !important;
+  color: white !important;
+  border: none !important;
 }
 
-.custom-button:hover:not(:disabled) {
-  transform: translateY(-2px);
-  background: rgba(255, 255, 255, 0.9) !important;
+.custom-button:hover {
+  background-color: var(--primary-hover) !important;
 }
 
 .custom-button:active:not(:disabled) {
@@ -216,6 +228,11 @@
   background: rgba(255, 255, 255, 0.2);
   color: white;
   border: 1px solid rgba(255, 255, 255, 0.4);
+}
+
+.tag.is-primary {
+  background-color: var(--primary-color) !important;
+  color: white;
 }
 
 /* Success Message Styling */
@@ -248,15 +265,16 @@
   padding: 2rem;
   transition: transform 0.2s ease, box-shadow 0.2s ease;
   text-align: center;
+  border-top: 3px solid var(--primary-color);
 }
 
 .feature-box:hover {
   transform: translateY(-5px);
-  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 8px 15px rgba(0,0,0,0.1);
 }
 
 .feature-icon {
-  color: #4a90e2;
+  color: var(--primary-color);
   width: 48px;
   height: 48px;
   margin: 0 auto;
@@ -275,7 +293,7 @@
 
 /* CTA Section */
 .cta-section {
-  background: linear-gradient(135deg, #2c5282 0%, #4a90e2 100%);
+  background: linear-gradient(135deg, #2c5282 0%, var(--primary-color) 100%);
   color: white;
   padding: 5rem 1.5rem;
 }
@@ -315,6 +333,10 @@
 
 .faq-box .title {
   color: #2c5282;
+}
+
+.title.is-orange {
+  color: var(--primary-color) !important;
 }
 
 /* Responsive adjustments */

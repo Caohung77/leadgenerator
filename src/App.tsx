@@ -89,15 +89,15 @@ function App() {
                   und baue dein B2B-Geschäft aus.
                 </p>
                 <div className="tags">
-                  <span className="tag is-white is-medium">✓ Kostenlos</span>
-                  <span className="tag is-white is-medium">✓ DSGVO-konform</span>
-                  <span className="tag is-white is-medium">✓ Sofort nutzbar</span>
+                  <span className="tag is-orange is-medium">✓ Kostenlos</span>
+                  <span className="tag is-orange is-medium">✓ DSGVO-konform</span>
+                  <span className="tag is-orange is-medium">✓ Sofort nutzbar</span>
                 </div>
               </div>
               <div className="column is-5 is-offset-1">
                 <div className="box form-container" id="generator">
                   <div className="form-header has-text-centered">
-                    <h2 className="title is-2 mb-2">Lead-Generator</h2>
+                    <h2 className="title is-2 mb-2 is-orange">Lead-Generator</h2>
                     <p className="subtitle is-5 has-text-grey">
                       Starte jetzt mit der Lead-Generierung
                     </p>
@@ -148,7 +148,7 @@ function App() {
 
                     <div className="field">
                       <button 
-                        className={`button is-primary is-fullwidth ${isSubmitting ? 'is-loading' : ''}`}
+                        className={`button is-orange is-fullwidth ${isSubmitting ? 'is-loading' : ''}`}
                         type="submit"
                       >
                         Leads generieren
@@ -171,7 +171,7 @@ function App() {
             <div className="column is-4">
               <div className="box feature-box">
                 <Target className="feature-icon mb-4" />
-                <h3 className="title is-4">Zielgerichtete Lead-Generierung</h3>
+                <h3 className="title is-4 is-orange">Zielgerichtete Lead-Generierung</h3>
                 <p>
                   Finde Leads genau in deiner Branche. Unser Tool sucht die 
                   passendsten Geschäftskontakte für deinen Erfolg.
@@ -181,7 +181,7 @@ function App() {
             <div className="column is-4">
               <div className="box feature-box">
                 <MapPin className="feature-icon mb-4" />
-                <h3 className="title is-4">Regionale Lead-Generierung</h3>
+                <h3 className="title is-4 is-orange">Regionale Lead-Generierung</h3>
                 <p>
                   Entdecke Leads in deiner Nähe. Nutze die Geschäftschancen 
                   direkt vor deiner Haustür.
@@ -191,7 +191,7 @@ function App() {
             <div className="column is-4">
               <div className="box feature-box">
                 <Zap className="feature-icon mb-4" />
-                <h3 className="title is-4">Automatische Lead-Generierung</h3>
+                <h3 className="title is-4 is-orange">Automatische Lead-Generierung</h3>
                 <p>
                   Spare Zeit mit unserer automatischen Lead-Generierung. 
                   DSGVO-konform und sofort startklar.
@@ -211,7 +211,7 @@ function App() {
             Entdecke neue Geschäftskontakte für dein Unternehmen
           </p>
           <button 
-            className="button is-warning is-large custom-button"
+            className="button is-orange is-large custom-button"
             onClick={scrollToGenerator}
             aria-label="Jetzt Leads generieren"
           >
