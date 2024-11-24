@@ -289,11 +289,36 @@
 .box.has-text-centered {
   padding: 4rem;
   border-radius: 16px;
+  background: #f8fafc;
+  border: 1px solid #e5e7eb;
 }
 
-.box.has-text-centered .is-size-1 {
-  color: #4a90e2;
-  margin-bottom: 2rem;
+.box.has-text-centered .title {
+  color: var(--primary-color) !important;
+  font-weight: 600;
+}
+
+.box.has-text-centered .subtitle {
+  color: #6b7280 !important;
+  font-weight: normal;
+}
+
+.success-icon {
+  width: 64px;
+  height: 64px;
+  color: var(--primary-color);
+  animation: scaleIn 0.5s ease-out;
+}
+
+@keyframes scaleIn {
+  from {
+    transform: scale(0);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
 }
 
 /* New SEO-optimized content styles */
