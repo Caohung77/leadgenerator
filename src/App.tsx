@@ -145,7 +145,7 @@ function App() {
                         />
                       </div>
                       <p className="help has-text-grey">
-                        Deine E-Mail wird nur für den Versand der Lead-Liste und gelegentliche News verwendet.
+                        Deine E-Mail wird nur für den Versand der Lead-Liste und für Neuigkeiten von Sophiena verwendet.
                       </p>
                     </div>
 
