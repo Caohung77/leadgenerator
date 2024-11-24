@@ -28,30 +28,38 @@
   line-height: 1.2;
 }
 
+/* Navbar Styling */
 .navbar {
-  border-bottom: 1px solid rgba(0,0,0,0.1);
-}
-
-.navbar {
-  background: transparent;
-  position: absolute;
+  background-color: white !important;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  padding: 1rem 0;
+  position: fixed;
+  width: 100%;
   top: 0;
-  left: 0;
-  right: 0;
-  z-index: 10;
+  z-index: 30;
 }
 
-.navbar-item strong {
-  color: white;
+.navbar-brand {
+  align-items: center;
+}
+
+.logo-image {
+  width: auto;
+  height: 40px;
+  object-fit: contain;
+  padding: 0;
+}
+
+.navbar-item {
+  padding: 0.5rem 1rem;
 }
 
 .navbar-item img {
   max-height: none;
 }
 
-.logo-image {
-  height: 50px;
-  max-height: none;
+.navbar-item strong {
+  color: white;
 }
 
 .box {

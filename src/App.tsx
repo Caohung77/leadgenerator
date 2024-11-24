@@ -62,7 +62,7 @@ function App() {
 
   return (
     <>
-      <nav className="navbar is-transparent">
+      <nav className="navbar">
         <div className="container">
           <div className="navbar-brand">
             <a className="navbar-item" href="/" aria-label="Lead Generator Tool Homepage">
@@ -71,8 +71,6 @@ function App() {
                 alt="Lead Generator Tool - Professionelle Lead-Generierung" 
                 className="logo-image"
                 loading="eager"
-                width="50"
-                height="50"
               />
             </a>
           </div>
