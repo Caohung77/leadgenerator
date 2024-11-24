@@ -65,8 +65,15 @@ function App() {
       <nav className="navbar is-transparent">
         <div className="container">
           <div className="navbar-brand">
-            <a className="navbar-item" href="/">
-              <img src="/sophia.png" alt="Sophia AI" className="logo-image" />
+            <a className="navbar-item" href="/" aria-label="Lead Generator Tool Homepage">
+              <img 
+                src="/sophia.png" 
+                alt="Lead Generator Tool - Professionelle Lead-Generierung" 
+                className="logo-image"
+                loading="eager"
+                width="50"
+                height="50"
+              />
             </a>
           </div>
         </div>
@@ -78,18 +85,25 @@ function App() {
             <div className="columns is-vcentered">
               <div className="column is-6">
                 <h1 className="title is-2 has-text-white mb-6">
-                  Leads Generieren - Regionale Kontakte für Dein Business
+                  Leads Generieren mit Unserem Effizienten Tool
                 </h1>
                 <p className="subtitle is-5 has-text-white mb-6">
-                  Möchtest Du gezielt Leads generieren? Unser Service bietet Dir die Möglichkeit, Emails von Branchen oder Services aus Deiner Region zu erhalten. Ideal für lokale Unternehmen, die wachsen möchten.
+                  Unser Tool hilft Ihnen dabei, effektiv Leads zu generieren. Nutzen Sie unsere 
+                  professionelle Plattform, um qualifizierte Geschäftskontakte in Ihrer Region 
+                  zu finden und Ihr B2B-Geschäft auszubauen.
                 </p>
+                <div className="tags">
+                  <span className="tag is-white is-medium">✓ Kostenlos</span>
+                  <span className="tag is-white is-medium">✓ DSGVO-konform</span>
+                  <span className="tag is-white is-medium">✓ Sofort nutzbar</span>
+                </div>
               </div>
               <div className="column is-5 is-offset-1">
                 <div className="box form-container" id="generator">
                   <div className="form-header has-text-centered">
                     <h2 className="title is-2 mb-2">Lead-Generator</h2>
                     <p className="subtitle is-5 has-text-grey">
-                      Erhalten Sie Ihre personalisierte Lead-Liste
+                      Starten Sie jetzt mit der Lead-Generierung
                     </p>
                   </div>
                   
@@ -169,32 +183,37 @@ function App() {
 
       <section className="section" id="how-it-works">
         <div className="container">
-          <h2 className="title is-3 mb-6">Wie funktioniert das Leads Generieren?</h2>
+          <h2 className="title is-3 mb-6 has-text-centered">
+            So Funktioniert Professionelle Lead-Generierung
+          </h2>
           <div className="columns is-multiline">
             <div className="column is-4">
               <div className="box feature-box">
                 <Target className="feature-icon mb-4" />
-                <h3 className="title is-4">Erhalte gezielte Branchenkontakte</h3>
+                <h3 className="title is-4">Zielgerichtete Lead-Generierung</h3>
                 <p>
-                  Wähle Deine Zielbranche und erhalte relevante Geschäftskontakte direkt in Dein Postfach.
+                  Generieren Sie Leads genau in Ihrer Zielbranche. Unser Tool findet die 
+                  relevantesten Geschäftskontakte für Ihren Erfolg.
                 </p>
               </div>
             </div>
             <div className="column is-4">
               <div className="box feature-box">
                 <MapPin className="feature-icon mb-4" />
-                <h3 className="title is-4">So erreichst Du potenzielle Kunden in Deiner Region</h3>
+                <h3 className="title is-4">Regionale Lead-Generierung</h3>
                 <p>
-                  Definiere Dein Einzugsgebiet und finde Leads in Deiner Nähe.
+                  Finden Sie Leads in Ihrer Region. Nutzen Sie lokale Geschäftschancen 
+                  durch gezielte Lead-Generierung.
                 </p>
               </div>
             </div>
             <div className="column is-4">
               <div className="box feature-box">
                 <Zap className="feature-icon mb-4" />
-                <h2 className="title is-4">Vorteile unserer Plattform</h2>
+                <h3 className="title is-4">Automatisierte Lead-Generierung</h3>
                 <p>
-                  Automatisierte Lead-Generierung, DSGVO-konform und sofort einsatzbereit.
+                  Sparen Sie Zeit durch unsere automatisierte Lead-Generierung. 
+                  DSGVO-konform und sofort einsatzbereit.
                 </p>
               </div>
             </div>
@@ -204,10 +223,16 @@ function App() {
 
       <section className="section cta-section has-text-centered">
         <div className="container">
-          <p className="is-size-4 mb-5">Erreiche Deine Zielgruppe schnell und effizient.</p>
+          <h2 className="title is-3 has-text-white mb-5">
+            Starten Sie Jetzt mit der Lead-Generierung
+          </h2>
+          <p className="is-size-4 mb-5">
+            Nutzen Sie die Chance, neue Geschäftskontakte zu generieren
+          </p>
           <button 
             className="button is-warning is-large custom-button"
             onClick={scrollToGenerator}
+            aria-label="Jetzt Leads generieren"
           >
             Jetzt Leads Generieren
           </button>
