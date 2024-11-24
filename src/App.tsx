@@ -87,12 +87,12 @@ function App() {
             <div className="columns is-vcentered">
               <div className="column is-6">
                 <h1 className="title is-2 has-text-white mb-6">
-                  Generiere Leads mit unserem effizienten Tool
+                  Leads Generieren - Einfach und Effizient
                 </h1>
                 <p className="subtitle is-5 has-text-white mb-6">
-                  Mit unserem Tool findest du ganz einfach neue Leads. 
-                  Entdecke qualifizierte Geschäftskontakte in deiner Region 
-                  und baue dein B2B-Geschäft aus.
+                  Mit unserem Tool kannst du ganz einfach B2B Leads generieren. 
+                  Finde qualifizierte Geschäftskontakte in deiner Region 
+                  und baue dein Business aus.
                 </p>
                 <div className="tags">
                   <span className="tag is-orange is-medium">✓ Kostenlos</span>
