@@ -21,11 +21,13 @@
 
 :root {
   --primary-color: #FF7E23;
-  --primary-hover: #e66a12;
+  --secondary-color: #2563eb;
+  --gradient-start: #2563eb;
+  --gradient-end: #FF7E23;
 }
 
 .hero.is-primary {
-  background: linear-gradient(135deg, #2b4162 0%, var(--primary-color) 100%);
+  background: linear-gradient(135deg, var(--gradient-start) 0%, var(--gradient-end) 100%);
 }
 
 .hero.is-primary .title {
@@ -103,7 +105,8 @@
 }
 
 .button.is-primary:hover {
-  background-color: var(--primary-hover) !important;
+  background-color: #e66a10 !important;
+  transform: translateY(-2px);
 }
 
 .button.is-white {
@@ -143,7 +146,11 @@
 }
 
 .section {
-  padding: 5rem 1.5rem;
+  padding: 3rem 1.5rem;
+}
+
+.section:nth-child(odd) {
+  background: linear-gradient(135deg, rgba(37, 99, 235, 0.05) 0%, rgba(255, 126, 35, 0.05) 100%);
 }
 
 #generator {
@@ -153,6 +160,17 @@
 .footer {
   border-top: 1px solid rgba(0,0,0,0.1);
   padding: 3rem 1.5rem;
+  background: linear-gradient(135deg, rgba(37, 99, 235, 0.05) 0%, rgba(255, 126, 35, 0.05) 100%);
+  border-top: 1px solid rgba(37, 99, 235, 0.1);
+}
+
+.footer a {
+  color: var(--secondary-color);
+  transition: color 0.3s ease;
+}
+
+.footer a:hover {
+  color: var(--primary-color);
 }
 
 /* Form Styling */
@@ -280,7 +298,9 @@
 
 /* New SEO-optimized content styles */
 .hero {
-  background: linear-gradient(135deg, #4a90e2 0%, #2c5282 100%);
+  background: linear-gradient(135deg, var(--gradient-start) 0%, var(--gradient-end) 100%);
+  position: relative;
+  overflow: hidden;
 }
 
 .hero-body {
@@ -338,7 +358,7 @@
 
 /* CTA Section */
 .cta-section {
-  background: linear-gradient(135deg, #2c5282 0%, var(--primary-color) 100%);
+  background: linear-gradient(135deg, var(--gradient-start) 0%, var(--gradient-end) 100%);
   color: white;
   padding: 5rem 1.5rem;
 }
@@ -361,8 +381,13 @@
 
 /* FAQ Section */
 .faq-section {
-  background-color: #f8fafc;
-  padding: 5rem 1.5rem;
+  padding: 1rem;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+}
+
+.faq-section:hover {
+  background: linear-gradient(135deg, rgba(37, 99, 235, 0.1) 0%, rgba(255, 126, 35, 0.1) 100%);
 }
 
 .faq-box {
@@ -385,14 +410,43 @@
 }
 
 .faq-question {
-  color: #666666 !important;
+  color: var(--secondary-color) !important;
   font-weight: 500;
-  margin-bottom: 0.5rem;
+  margin-bottom: 0.75rem;
 }
 
 .faq-section h3 {
   color: #666666 !important;
   font-weight: 500;
+}
+
+/* Steps Section */
+.steps-section {
+  background: linear-gradient(135deg, rgba(37, 99, 235, 0.05) 0%, rgba(255, 126, 35, 0.05) 100%);
+}
+
+.step-box {
+  padding: 2rem;
+  border-radius: 12px;
+  background: white;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+  border: 1px solid rgba(37, 99, 235, 0.1);
+}
+
+.step-box:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+  border-color: var(--primary-color);
+}
+
+.step-number {
+  font-size: 2rem;
+  font-weight: bold;
+  background: linear-gradient(135deg, var(--gradient-start), var(--gradient-end));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin-bottom: 1rem;
 }
 
 /* Success Icon Styles */

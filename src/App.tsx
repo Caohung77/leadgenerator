@@ -179,73 +179,32 @@ function App() {
               </div>
             </section>
 
-            <section className="section" id="how-it-works">
+            <section className="section steps-section">
               <div className="container">
-                <h2 className="title is-2 mb-6 has-text-centered">
-                  So findest du deine Leads
-                </h2>
-                <div className="columns is-multiline">
+                <h2 className="title is-3 has-text-centered mb-6">So findest du deine Leads</h2>
+                <div className="columns">
                   <div className="column is-4">
-                    <div className="box feature-box">
-                      <Target className="feature-icon mb-4" />
-                      <h3 className="title is-4 is-orange">Zielgerichtete Lead-Generierung</h3>
-                      <p>
-                        Finde Leads genau in deiner Branche. Unser Tool sucht die 
-                        passendsten Geschäftskontakte für deinen Erfolg.
-                      </p>
+                    <div className="step-box">
+                      <div className="step-number">1</div>
+                      <h3 className="title is-4">Branche wählen</h3>
+                      <p>Wähle die Branche oder den Service aus, für den du Leads generieren möchtest.</p>
                     </div>
                   </div>
                   <div className="column is-4">
-                    <div className="box feature-box">
-                      <MapPin className="feature-icon mb-4" />
-                      <h3 className="title is-4 is-orange">Regionale Lead-Generierung</h3>
-                      <p>
-                        Entdecke Leads in deiner Nähe. Nutze die Geschäftschancen 
-                        direkt vor deiner Haustür.
-                      </p>
+                    <div className="step-box">
+                      <div className="step-number">2</div>
+                      <h3 className="title is-4">Region festlegen</h3>
+                      <p>Gib die Region oder Stadt an, in der du nach Leads suchen möchtest.</p>
                     </div>
                   </div>
                   <div className="column is-4">
-                    <div className="box feature-box">
-                      <Zap className="feature-icon mb-4" />
-                      <h3 className="title is-4 is-orange">Automatische Lead-Generierung</h3>
-                      <p>
-                        Spare Zeit mit unserer automatischen Lead-Generierung. 
-                        DSGVO-konform und sofort startklar.
-                      </p>
+                    <div className="step-box">
+                      <div className="step-number">3</div>
+                      <h3 className="title is-4">Leads erhalten</h3>
+                      <p>Erhalte sofort eine Liste mit relevanten Geschäftskontakten per E-Mail.</p>
                     </div>
                   </div>
                 </div>
-              </div>
-            </section>
-
-            <section className="section cta-section has-text-centered">
-              <div className="container">
-                <h2 className="title is-2 has-text-white mb-5">
-                  Starte jetzt mit der Lead-Generierung
-                </h2>
-                <h3 className="subtitle is-4 mb-5">
-                  Entdecke neue Geschäftskontakte für dein Unternehmen
-                </h3>
-                <button 
-                  className="button is-orange is-large custom-button"
-                  onClick={scrollToGenerator}
-                  aria-label="Jetzt Leads generieren"
-                >
-                  Jetzt Leads generieren
-                </button>
-              </div>
-            </section>
-
-            <section className="section localized-content">
-              <div className="container">
-                <h2 className="title is-3 mb-5">Warum regionale Kontakte wichtig sind</h2>
-                <p className="is-size-5 mb-6">
-                  Unser Tool hilft Unternehmen in Deutschland, Österreich und der Schweiz dabei, 
-                  gezielt Leads zu generieren. Egal, ob Du im Gesundheitswesen, der Gastronomie 
-                  oder im Handwerk tätig bist – wir verbinden Dich mit relevanten Kontakten in 
-                  Deiner Region.
-                </p>
               </div>
             </section>
 
@@ -278,6 +237,13 @@ function App() {
                     </div>
                   </div>
                 </div>
+              </div>
+            </section>
+
+            <section className="section cta-section">
+              <div className="container has-text-centered">
+                <h2 className="title is-3 has-text-white mb-6">Bereit, neue Kunden zu gewinnen?</h2>
+                <a href="#generator" className="button is-white is-large">Jetzt Leads generieren</a>
               </div>
             </section>
 
