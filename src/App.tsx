@@ -242,8 +242,8 @@ function App() {
 
             <section className="section cta-section">
               <div className="container has-text-centered">
-                <h2 className="title is-3 has-text-white mb-6">Bereit, neue Kunden zu gewinnen?</h2>
-                <a href="#generator" className="button is-white is-large">Jetzt Leads generieren</a>
+                <h2 className="title is-3 mb-6">Bereit, neue Kunden zu gewinnen?</h2>
+                <a href="#generator" className="button is-white is-medium">Jetzt Leads generieren</a>
               </div>
             </section>
 
