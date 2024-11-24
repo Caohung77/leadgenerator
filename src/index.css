@@ -366,7 +366,7 @@
 }
 
 .cta-section .title {
-  color: #1f2937 !important;
+  color: #354458 !important;
 }
 
 .cta-section .button.is-white {
@@ -396,44 +396,39 @@
 
 /* FAQ Section */
 .faq-section {
-  padding: 1rem;
-  border-radius: 8px;
-  transition: all 0.3s ease;
-  background: white;
+  background-color: #EEF2FF !important;
+  padding: 4rem 1.5rem;
+  border-bottom: 1px solid #E0E7FF;
 }
 
-.faq-section:hover {
-  background: linear-gradient(135deg, rgba(37, 99, 235, 0.02) 0%, rgba(255, 126, 35, 0.02) 100%);
-}
-
-.faq-box {
-  height: 100%;
-  padding: 2rem;
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
-}
-
-.faq-box:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
-}
-
-.faq-box .title {
-  color: #2c5282;
-}
-
-.title.is-orange {
-  color: var(--primary-color) !important;
+.faq-section .title {
+  color: #1E40AF !important;
 }
 
 .faq-question {
-  color: var(--secondary-color) !important;
-  font-weight: 500;
-  margin-bottom: 0.75rem;
+  color: #2563EB !important;
+  font-weight: 600;
+  margin-bottom: 1rem;
+  font-size: 1.1rem;
 }
 
-.faq-section h3 {
-  color: #666666 !important;
-  font-weight: 500;
+.faq-section p {
+  color: #4B5563;
+  line-height: 1.6;
+}
+
+.faq-section > div {
+  background-color: white;
+  padding: 1.5rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(37, 99, 235, 0.05);
+  transition: all 0.3s ease;
+  margin-bottom: 1rem;
+}
+
+.faq-section > div:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 6px rgba(37, 99, 235, 0.1);
 }
 
 /* Steps Section */
@@ -484,7 +479,7 @@
 }
 
 .step-box h3 {
-  color: #374151;
+  color: #646d7a;
   font-size: 1.25rem;
   font-weight: 600;
   margin-bottom: 0.75rem;

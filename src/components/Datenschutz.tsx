@@ -11,7 +11,7 @@ const Datenschutz = () => {
           Cao Hung Nguyen<br />
           Am Kaisersbusch 6<br />
           42781 Haan<br />
-          E-Mail: info@boniforce.de
+          E-Mail: caohung.nguyen@googlemail.com
         </p>
 
         <h2 className="title is-4">Übersicht der Verarbeitungen</h2>
