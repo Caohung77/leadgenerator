@@ -179,6 +179,34 @@ function App() {
               </div>
             </section>
 
+            <section className="section features-section">
+              <div className="container">
+                <div className="columns is-multiline">
+                  <div className="column is-4">
+                    <div className="feature-box">
+                      <Target className="feature-icon" />
+                      <h3>Zielgerichtete Suche</h3>
+                      <p>Finde genau die Leads, die zu deinem Geschäft passen. Branchenspezifisch und relevant.</p>
+                    </div>
+                  </div>
+                  <div className="column is-4">
+                    <div className="feature-box">
+                      <MapPin className="feature-icon" />
+                      <h3>Regionale Kontakte</h3>
+                      <p>Entdecke Geschäftsmöglichkeiten in deiner Region. Lokal und persönlich.</p>
+                    </div>
+                  </div>
+                  <div className="column is-4">
+                    <div className="feature-box">
+                      <Zap className="feature-icon" />
+                      <h3>Sofort nutzbar</h3>
+                      <p>Erhalte deine Leads innerhalb weniger Minuten. Schnell und unkompliziert.</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </section>
+
             <section className="section steps-section">
               <div className="container">
                 <h2 className="steps-title title is-3">So findest du deine Leads</h2>
