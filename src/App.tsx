@@ -86,14 +86,14 @@ function App() {
           <div className="container">
             <div className="columns is-vcentered">
               <div className="column is-6">
-                <h1 className="title is-2 has-text-white mb-6">
+                <h1 className="title is-1 has-text-white mb-6">
                   Leads Generieren - Einfach und Effizient
                 </h1>
-                <p className="subtitle is-5 has-text-white mb-6">
+                <h2 className="subtitle is-4 has-text-white mb-6">
                   Mit unserem Tool kannst du ganz einfach B2B Leads generieren. 
                   Finde qualifizierte Geschäftskontakte in deiner Region 
                   und baue dein Business aus.
-                </p>
+                </h2>
                 <div className="tags">
                   <span className="tag is-orange is-medium">✓ Kostenlos</span>
                   <span className="tag is-orange is-medium">✓ DSGVO-konform</span>
@@ -173,7 +173,7 @@ function App() {
 
       <section className="section" id="how-it-works">
         <div className="container">
-          <h2 className="title is-3 mb-6 has-text-centered">
+          <h2 className="title is-2 mb-6 has-text-centered">
             So findest du deine Leads
           </h2>
           <div className="columns is-multiline">
@@ -213,12 +213,12 @@ function App() {
 
       <section className="section cta-section has-text-centered">
         <div className="container">
-          <h2 className="title is-3 has-text-white mb-5">
+          <h2 className="title is-2 has-text-white mb-5">
             Starte jetzt mit der Lead-Generierung
           </h2>
-          <p className="is-size-4 mb-5">
+          <h3 className="subtitle is-4 mb-5">
             Entdecke neue Geschäftskontakte für dein Unternehmen
-          </p>
+          </h3>
           <button 
             className="button is-orange is-large custom-button"
             onClick={scrollToGenerator}
