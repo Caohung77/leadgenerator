@@ -198,22 +198,33 @@
 }
 
 .custom-button {
-  height: 3.5rem;
-  border-radius: 12px;
-  font-weight: 600;
-  font-size: 1.1rem;
-  transition: all 0.2s ease;
-  background-color: var(--primary-color) !important;
+  background-color: #FF7E23 !important;
   color: white !important;
   border: none !important;
+  font-weight: 600;
+  padding: 1.5rem 2rem;
+  height: 3.5rem;
+  border-radius: 8px;
+  font-size: 1.1rem;
+  transition: all 0.3s ease;
 }
 
 .custom-button:hover {
-  background-color: var(--primary-hover) !important;
+  background-color: #e66a12 !important;
+  transform: translateY(-2px);
 }
 
-.custom-button:active:not(:disabled) {
+.custom-button:active {
   transform: translateY(0);
+}
+
+.custom-button.is-loading {
+  opacity: 0.8;
+  pointer-events: none;
+}
+
+.custom-button.is-loading::after {
+  border-color: transparent transparent #fff #fff !important;
 }
 
 .help.has-text-white {

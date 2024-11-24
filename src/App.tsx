@@ -148,7 +148,7 @@ function App() {
 
                     <div className="field">
                       <button 
-                        className={`button is-orange is-fullwidth ${isSubmitting ? 'is-loading' : ''}`}
+                        className={`button custom-button is-fullwidth ${isSubmitting ? 'is-loading' : ''}`}
                         type="submit"
                       >
                         Leads generieren
