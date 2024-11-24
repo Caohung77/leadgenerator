@@ -74,7 +74,7 @@ function App() {
         <Route path="/datenschutz" element={<Datenschutz />} />
         <Route path="/" element={
           <>
-            <nav className="navbar">
+            <nav className="navbar" role="navigation" aria-label="main navigation">
               <div className="container">
                 <div className="navbar-brand">
                   <a className="navbar-item" href="/" aria-label="Lead Generator Tool Homepage">
@@ -88,6 +88,24 @@ function App() {
                 </div>
               </div>
             </nav>
+
+            <section className="hero is-primary is-medium">
+              <div className="hero-body">
+                <div className="container">
+                  <h1 className="title is-1 mb-4">
+                    Leads generieren leicht gemacht: B2B-Kontakte finden
+                  </h1>
+                  <p className="subtitle is-4 mb-6">
+                    Finde qualifizierte Geschäftskontakte in deiner Region
+                  </p>
+                  <div className="tags">
+                    <span className="tag is-medium">Zielgerichtete Suche</span>
+                    <span className="tag is-medium">Regionale Kontakte</span>
+                    <span className="tag is-medium">Sofort nutzbar</span>
+                  </div>
+                </div>
+              </div>
+            </section>
 
             <section className="hero is-fullheight-with-navbar">
               <div className="hero-body">
