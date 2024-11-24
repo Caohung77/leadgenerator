@@ -74,56 +74,43 @@ function App() {
         <Route path="/datenschutz" element={<Datenschutz />} />
         <Route path="/" element={
           <>
-            <nav className="navbar" role="navigation" aria-label="main navigation">
+            <nav className="navbar">
               <div className="container">
                 <div className="navbar-brand">
                   <a className="navbar-item" href="/" aria-label="Lead Generator Tool Homepage">
                     <img 
                       src="/sophia.png" 
-                      alt="Lead Generator Tool - Professionelle Lead-Generierung" 
+                      alt="Sophiena Lead Generator Logo"
                       className="logo-image"
-                      loading="eager"
                     />
                   </a>
                 </div>
               </div>
             </nav>
 
-            <section className="hero is-primary is-medium">
-              <div className="hero-body">
-                <div className="container">
-                  <h1 className="title is-1 mb-4">
-                    Leads generieren leicht gemacht: B2B-Kontakte finden
-                  </h1>
-                  <p className="subtitle is-4 mb-6">
-                    Finde qualifizierte Geschäftskontakte in deiner Region
-                  </p>
-                  <div className="tags">
-                    <span className="tag is-medium">Zielgerichtete Suche</span>
-                    <span className="tag is-medium">Regionale Kontakte</span>
-                    <span className="tag is-medium">Sofort nutzbar</span>
-                  </div>
-                </div>
-              </div>
-            </section>
-
             <section className="hero is-fullheight-with-navbar">
               <div className="hero-body">
                 <div className="container">
                   <div className="columns is-vcentered">
                     <div className="column is-6">
-                      <h1 className="title is-1 has-text-white mb-6">
-                        Leads Generieren - Einfach und Effizient
+                      <h1 className="title is-1 mb-6">
+                        Leads generieren leicht gemacht
                       </h1>
-                      <h2 className="subtitle is-4 has-text-white mb-6">
-                        Mit unserem Tool kannst du ganz einfach B2B Leads generieren. 
-                        Finde qualifizierte Geschäftskontakte in deiner Region 
-                        und baue dein Business aus.
-                      </h2>
-                      <div className="tags">
-                        <span className="tag is-orange is-medium">✓ Kostenlos</span>
-                        <span className="tag is-orange is-medium">✓ DSGVO-konform</span>
-                        <span className="tag is-orange is-medium">✓ Sofort nutzbar</span>
+                      <p className="subtitle is-4 mb-6">
+                        Finde qualifizierte B2B-Kontakte in deiner Region
+                      </p>
+                      <div className="tags mb-6">
+                        <span className="tag is-medium">Zielgerichtete Suche</span>
+                        <span className="tag is-medium">Regionale Kontakte</span>
+                        <span className="tag is-medium">Sofort nutzbar</span>
+                      </div>
+                      <div className="buttons">
+                        <a href="#generator" className="button is-warning is-medium">
+                          <span>Jetzt Leads generieren</span>
+                          <span className="icon">
+                            <ChevronRight />
+                          </span>
+                        </a>
                       </div>
                     </div>
                     <div className="column is-5 is-offset-1">
