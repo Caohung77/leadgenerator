@@ -2,11 +2,9 @@ import React, { useState } from 'react';
 import { Building2, MapPin, Mail, ChevronRight, Target, Zap, BarChart } from 'lucide-react';
 
 function App() {
-  const [formData, setFormData] = useState({
-    industry: '',
-    location: '',
-    email: ''
-  });
+  const [industry, setIndustry] = useState('');
+  const [location, setLocation] = useState('');
+  const [email, setEmail] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
 
@@ -27,7 +25,7 @@ function App() {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify(formData),
+        body: JSON.stringify({ industry, location, email }),
       });
 
       if (response.ok) {
@@ -83,12 +81,12 @@ function App() {
             <div className="columns is-vcentered">
               <div className="column is-6">
                 <h1 className="title is-2 has-text-white mb-6">
-                  Leads Generieren mit Unserem Effizienten Tool
+                  Generiere Leads mit unserem effizienten Tool
                 </h1>
                 <p className="subtitle is-5 has-text-white mb-6">
-                  Unser Tool hilft Ihnen dabei, effektiv Leads zu generieren. Nutzen Sie unsere 
-                  professionelle Plattform, um qualifizierte Geschäftskontakte in Ihrer Region 
-                  zu finden und Ihr B2B-Geschäft auszubauen.
+                  Mit unserem Tool findest du ganz einfach neue Leads. 
+                  Entdecke qualifizierte Geschäftskontakte in deiner Region 
+                  und baue dein B2B-Geschäft aus.
                 </p>
                 <div className="tags">
                   <span className="tag is-white is-medium">✓ Kostenlos</span>
@@ -101,75 +99,60 @@ function App() {
                   <div className="form-header has-text-centered">
                     <h2 className="title is-2 mb-2">Lead-Generator</h2>
                     <p className="subtitle is-5 has-text-grey">
-                      Starten Sie jetzt mit der Lead-Generierung
+                      Starte jetzt mit der Lead-Generierung
                     </p>
                   </div>
                   
                   <form onSubmit={handleSubmit} className="styled-form">
                     <div className="field">
-                      <label className="label is-medium">Branche</label>
-                      <div className="control has-icons-left">
-                        <input
-                          className="input is-medium custom-input"
-                          type="text"
-                          placeholder="z.B. IT, Automotive, Handel"
-                          required
-                          value={formData.industry}
-                          onChange={(e) => setFormData({ ...formData, industry: e.target.value })}
-                        />
-                        <span className="icon is-medium is-left">
-                          <Building2 className="custom-icon" />
-                        </span>
-                      </div>
-                    </div>
-
-                    <div className="field">
-                      <label className="label is-medium">Region</label>
-                      <div className="control has-icons-left">
-                        <input
-                          className="input is-medium custom-input"
-                          type="text"
-                          placeholder="z.B. Berlin, Bayern, Deutschland"
-                          required
-                          value={formData.location}
-                          onChange={(e) => setFormData({ ...formData, location: e.target.value })}
-                        />
-                        <span className="icon is-medium is-left">
-                          <MapPin className="custom-icon" />
-                        </span>
-                      </div>
-                    </div>
-
-                    <div className="field">
-                      <label className="label is-medium">Ihre E-Mail</label>
-                      <div className="control has-icons-left">
-                        <input
-                          className="input is-medium custom-input"
-                          type="email"
-                          placeholder="ihre.email@firma.de"
-                          required
-                          value={formData.email}
-                          onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                        />
-                        <span className="icon is-medium is-left">
-                          <Mail className="custom-icon" />
-                        </span>
-                      </div>
-                    </div>
-
-                    <div className="field mt-6">
+                      <label className="label">Branche</label>
                       <div className="control">
-                        <button 
-                          className={`button is-warning is-fullwidth is-medium custom-button ${isSubmitting ? 'is-loading' : ''}`}
-                          type="submit"
-                          disabled={isSubmitting}
-                        >
-                          {isSubmitting ? 'Wird verarbeitet...' : 'Leads generieren'}
-                        </button>
+                        <input
+                          className="input"
+                          type="text"
+                          placeholder="z.B. IT, Marketing, Handwerk"
+                          value={industry}
+                          onChange={(e) => setIndustry(e.target.value)}
+                          required
+                        />
                       </div>
-                      <p className="help has-text-centered mt-3 has-text-white">
-                        Kostenlos und unverbindlich
-                      </p>
+                    </div>
+
+                    <div className="field">
+                      <label className="label">Region</label>
+                      <div className="control">
+                        <input
+                          className="input"
+                          type="text"
+                          placeholder="z.B. Berlin, München, Hamburg"
+                          value={location}
+                          onChange={(e) => setLocation(e.target.value)}
+                          required
+                        />
+                      </div>
+                    </div>
+
+                    <div className="field">
+                      <label className="label">E-Mail</label>
+                      <div className="control">
+                        <input
+                          className="input"
+                          type="email"
+                          placeholder="deine@email.de"
+                          value={email}
+                          onChange={(e) => setEmail(e.target.value)}
+                          required
+                        />
+                      </div>
+                    </div>
+
+                    <div className="field">
+                      <button 
+                        className={`button is-primary is-fullwidth ${isSubmitting ? 'is-loading' : ''}`}
+                        type="submit"
+                      >
+                        Leads generieren
+                      </button>
                     </div>
                   </form>
                 </div>
@@ -182,7 +165,7 @@ function App() {
       <section className="section" id="how-it-works">
         <div className="container">
           <h2 className="title is-3 mb-6 has-text-centered">
-            So Funktioniert Professionelle Lead-Generierung
+            So findest du deine Leads
           </h2>
           <div className="columns is-multiline">
             <div className="column is-4">
@@ -190,8 +173,8 @@ function App() {
                 <Target className="feature-icon mb-4" />
                 <h3 className="title is-4">Zielgerichtete Lead-Generierung</h3>
                 <p>
-                  Generieren Sie Leads genau in Ihrer Zielbranche. Unser Tool findet die 
-                  relevantesten Geschäftskontakte für Ihren Erfolg.
+                  Finde Leads genau in deiner Branche. Unser Tool sucht die 
+                  passendsten Geschäftskontakte für deinen Erfolg.
                 </p>
               </div>
             </div>
@@ -200,18 +183,18 @@ function App() {
                 <MapPin className="feature-icon mb-4" />
                 <h3 className="title is-4">Regionale Lead-Generierung</h3>
                 <p>
-                  Finden Sie Leads in Ihrer Region. Nutzen Sie lokale Geschäftschancen 
-                  durch gezielte Lead-Generierung.
+                  Entdecke Leads in deiner Nähe. Nutze die Geschäftschancen 
+                  direkt vor deiner Haustür.
                 </p>
               </div>
             </div>
             <div className="column is-4">
               <div className="box feature-box">
                 <Zap className="feature-icon mb-4" />
-                <h3 className="title is-4">Automatisierte Lead-Generierung</h3>
+                <h3 className="title is-4">Automatische Lead-Generierung</h3>
                 <p>
-                  Sparen Sie Zeit durch unsere automatisierte Lead-Generierung. 
-                  DSGVO-konform und sofort einsatzbereit.
+                  Spare Zeit mit unserer automatischen Lead-Generierung. 
+                  DSGVO-konform und sofort startklar.
                 </p>
               </div>
             </div>
@@ -222,17 +205,17 @@ function App() {
       <section className="section cta-section has-text-centered">
         <div className="container">
           <h2 className="title is-3 has-text-white mb-5">
-            Starten Sie Jetzt mit der Lead-Generierung
+            Starte jetzt mit der Lead-Generierung
           </h2>
           <p className="is-size-4 mb-5">
-            Nutzen Sie die Chance, neue Geschäftskontakte zu generieren
+            Entdecke neue Geschäftskontakte für dein Unternehmen
           </p>
           <button 
             className="button is-warning is-large custom-button"
             onClick={scrollToGenerator}
             aria-label="Jetzt Leads generieren"
           >
-            Jetzt Leads Generieren
+            Jetzt Leads generieren
           </button>
         </div>
       </section>
