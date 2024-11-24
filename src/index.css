@@ -3,9 +3,13 @@
 @tailwind utilities;
 
 @layer base {
+  html {
+    scroll-behavior: smooth;
+  }
   body {
     @apply antialiased text-gray-900;
     font-family: 'Inter', sans-serif;
+    overflow-x: hidden;
   }
 }
 
@@ -97,6 +101,18 @@
 
 .button.is-warning.is-loading::after {
   border-color: transparent transparent #fff #fff !important;
+}
+
+.button.is-warning:hover:not([disabled]),
+.button.is-warning:focus:not([disabled]) {
+  background-color: #ff5a12 !important;
+  border-color: transparent !important;
+  color: white !important;
+}
+
+.cta-section .button.is-warning:hover {
+  background: #ff5a12 !important;
+  color: white !important;
 }
 
 .section {
@@ -205,6 +221,94 @@
   margin-bottom: 2rem;
 }
 
+/* New SEO-optimized content styles */
+.hero {
+  background: linear-gradient(135deg, #4a90e2 0%, #2c5282 100%);
+}
+
+.hero-body {
+  z-index: 1;
+}
+
+.title.is-2 {
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+.feature-box {
+  height: 100%;
+  padding: 2rem;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  text-align: center;
+}
+
+.feature-box:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
+}
+
+.feature-icon {
+  color: #4a90e2;
+  width: 48px;
+  height: 48px;
+  margin: 0 auto;
+}
+
+#how-it-works {
+  background-color: #f8fafc;
+  padding: 5rem 1.5rem;
+}
+
+#how-it-works .title.is-3 {
+  text-align: center;
+  margin-bottom: 3rem;
+  color: #2c5282;
+}
+
+/* CTA Section */
+.cta-section {
+  background: linear-gradient(135deg, #2c5282 0%, #4a90e2 100%);
+  color: white;
+  padding: 5rem 1.5rem;
+}
+
+.cta-section .button.is-large {
+  padding: 1.5rem 3rem;
+  font-size: 1.25rem;
+  height: auto;
+}
+
+/* Localized Content */
+.localized-content {
+  background-color: white;
+  padding: 5rem 1.5rem;
+}
+
+.localized-content .title {
+  color: #2c5282;
+}
+
+/* FAQ Section */
+.faq-section {
+  background-color: #f8fafc;
+  padding: 5rem 1.5rem;
+}
+
+.faq-box {
+  height: 100%;
+  padding: 2rem;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.faq-box:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
+}
+
+.faq-box .title {
+  color: #2c5282;
+}
+
 /* Responsive adjustments */
 @media screen and (max-width: 768px) {
   .hero-body {
@@ -230,5 +334,14 @@
 
   .tag.is-medium {
     margin-bottom: 0.5rem;
+  }
+
+  .cta-section .button.is-large {
+    padding: 1rem 2rem;
+    font-size: 1.1rem;
+  }
+  
+  .faq-box {
+    margin-bottom: 1rem;
   }
 }

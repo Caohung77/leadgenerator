@@ -10,5 +10,66 @@
   <body>
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
+    
+    <!-- FAQ Schema Markup -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "Was bedeutet Leads generieren?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Leads generieren bezieht sich auf den Prozess, potenzielle Kunden zu identifizieren und ihre Kontaktdaten zu sammeln."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Wie funktioniert das Tool?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Unser Tool analysiert Deine Anforderungen und liefert gezielte Leads von Branchen oder Services in Deiner Region."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Ist der Service DSGVO-konform?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Ja, unser Service ist vollständig DSGVO-konform und erfüllt alle Datenschutzanforderungen in der DACH-Region."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Wie schnell erhalte ich meine Leads?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Nach Deiner Anfrage erhältst Du innerhalb weniger Minuten eine kuratierte Liste mit relevanten Geschäftskontakten."
+            }
+          }
+        ]
+      }
+    </script>
+
+    <!-- Service Schema Markup -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "Service",
+        "name": "Leads Generieren",
+        "description": "Ein Service, der Unternehmen hilft, gezielte Kontakte in ihrer Region zu generieren.",
+        "provider": {
+          "@type": "Organization",
+          "name": "Lead Generator Tool",
+          "url": "https://leadgenerator-blond.vercel.app"
+        },
+        "areaServed": {
+          "@type": "Place",
+          "addressCountry": ["DE", "AT", "CH"]
+        }
+      }
+    </script>
   </body>
 </html>
