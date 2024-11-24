@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Building2, MapPin, Mail, ChevronRight, Target, Zap, BarChart } from 'lucide-react';
+import { Building2, MapPin, Mail, ChevronRight, Target, Zap, BarChart, CheckCircle } from 'lucide-react';
 
 function App() {
   const [industry, setIndustry] = useState('');
@@ -38,20 +38,26 @@ function App() {
     }
   };
 
+  function SuccessMessage() {
+    return (
+      <div className="box has-text-centered">
+        <div className="mb-4">
+          <CheckCircle className="success-icon" />
+        </div>
+        <h2 className="title is-3 mb-4">Vielen Dank!</h2>
+        <p className="subtitle is-5">
+          Deine Anfrage wurde erfolgreich übermittelt. Du erhältst in Kürze deine Lead-Liste per E-Mail.
+        </p>
+      </div>
+    );
+  }
+
   if (submitted) {
     return (
       <section className="hero is-fullheight">
         <div className="hero-body">
           <div className="container">
-            <div className="box has-text-centered">
-              <div className="mb-4">
-                <Mail className="is-size-1 has-text-success" />
-              </div>
-              <h2 className="title is-2">Vielen Dank!</h2>
-              <p className="subtitle">
-                Ihre Anfrage wurde erfolgreich übermittelt. Sie erhalten in Kürze die Lead-Liste per E-Mail.
-              </p>
-            </div>
+            <SuccessMessage />
           </div>
         </div>
       </section>

@@ -360,6 +360,25 @@
   color: var(--primary-color) !important;
 }
 
+/* Success Icon Styles */
+.success-icon {
+  width: 64px;
+  height: 64px;
+  color: var(--primary-color);
+  animation: scaleIn 0.5s ease-out;
+}
+
+@keyframes scaleIn {
+  from {
+    transform: scale(0);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
 /* Responsive adjustments */
 @media screen and (max-width: 768px) {
   .hero-body {
