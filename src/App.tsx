@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
 import { Building2, MapPin, Mail, ChevronRight, Target, Zap, BarChart, CheckCircle } from 'lucide-react';
 import Impressum from './components/Impressum';
+import Datenschutz from './components/Datenschutz';
 
 function App() {
   const [industry, setIndustry] = useState('');
@@ -70,6 +71,7 @@ function App() {
     <Router>
       <Routes>
         <Route path="/impressum" element={<Impressum />} />
+        <Route path="/datenschutz" element={<Datenschutz />} />
         <Route path="/" element={
           <>
             <nav className="navbar">
@@ -299,6 +301,8 @@ function App() {
                 </p>
                 <p className="is-size-7 mt-3">
                   <Link to="/impressum" className="has-text-grey">Impressum</Link>
+                  {" | "}
+                  <Link to="/datenschutz" className="has-text-grey">Datenschutz</Link>
                 </p>
               </div>
             </footer>
