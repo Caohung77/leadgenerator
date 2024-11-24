@@ -76,9 +76,31 @@ const Datenschutz = () => {
           Die von uns verarbeiteten Daten werden nach Maßgabe der gesetzlichen Vorgaben gelöscht, sobald deren zur Verarbeitung erlaubten Einwilligungen widerrufen werden oder sonstige Erlaubnisse entfallen (z.B., wenn der Zweck der Verarbeitung dieser Daten entfallen ist oder sie für den Zweck nicht erforderlich sind). Sofern die Daten nicht gelöscht werden, weil sie für andere und gesetzlich zulässige Zwecke erforderlich sind, wird deren Verarbeitung auf diese Zwecke beschränkt.
         </p>
 
-        <h2 className="title is-4">Kontaktaufnahme</h2>
+        <h2 className="title is-4">Kontaktaufnahme und E-Mail-Nutzung</h2>
         <p>
-          Bei der Kontaktaufnahme mit uns (z.B. per E-Mail) werden die Angaben der anfragenden Personen verarbeitet, soweit dies zur Beantwortung der Kontaktanfragen und etwaiger angefragter Maßnahmen erforderlich ist.
+          Bei der Kontaktaufnahme mit uns (z.B. per E-Mail) werden die Angaben der anfragenden Personen verarbeitet, 
+          soweit dies zur Beantwortung der Kontaktanfragen und etwaiger angefragter Maßnahmen erforderlich ist.
+        </p>
+        
+        <h3 className="title is-5">Verwendung von E-Mail-Adressen</h3>
+        <p>
+          Wir nutzen Ihre E-Mail-Adresse ausschließlich für:
+        </p>
+        <ul>
+          <li>Den Versand der von Ihnen angeforderten Lead-Adresslisten</li>
+          <li>Informations-E-Mails über unsere Dienstleistungen und Updates</li>
+        </ul>
+        
+        <h3 className="title is-5">Datenweitergabe</h3>
+        <p>
+          Ihre E-Mail-Adresse wird streng vertraulich behandelt und nicht an Dritte weitergegeben. 
+          Die Verarbeitung erfolgt ausschließlich durch uns und für die genannten Zwecke.
+        </p>
+
+        <h3 className="title is-5">Speicherdauer</h3>
+        <p>
+          Wir speichern Ihre E-Mail-Adresse so lange, wie es für die Erfüllung der genannten Zwecke erforderlich ist 
+          oder bis Sie der Nutzung widersprechen bzw. Ihre Einwilligung widerrufen.
         </p>
 
         <h2 className="title is-4">Cookies</h2>
