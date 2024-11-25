@@ -150,14 +150,6 @@
   background: white;
 }
 
-.section:nth-child(odd) {
-  background: linear-gradient(135deg, rgba(37, 99, 235, 0.02) 0%, rgba(255, 126, 35, 0.02) 100%);
-}
-
-#generator {
-  scroll-margin-top: 2rem;
-}
-
 .footer {
   border-top: 1px solid rgba(37, 99, 235, 0.1);
   padding: 3rem 1.5rem;
@@ -426,22 +418,19 @@
 
 /* FAQ Section */
 .faq-section {
-  background-color: white;
+  background-color: white !important;
   padding: 4rem 1.5rem;
   border-bottom: 1px solid #f3f4f6;
 }
 
 .faq-section .title {
-  color: #1f2937 !important;
-  margin-bottom: 3rem;
-  text-align: center;
+  color: var(--primary-color) !important;
 }
 
-.faq-question {
-  color: var(--primary-color) !important;
+.faq-section .faq-question {
+  color: #1f2937;
   font-weight: 600;
   margin-bottom: 1rem;
-  font-size: 1.1rem;
 }
 
 .faq-section p {
@@ -547,7 +536,7 @@
 
 /* Features Section */
 .features-section {
-  background-color: white;
+  background-color: white !important;
   padding: 4rem 1.5rem;
   border-bottom: 1px solid #f3f4f6;
 }
@@ -555,12 +544,15 @@
 .feature-box {
   padding: 2rem;
   text-align: center;
-  background: white;
+  background: white !important;
   height: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
   transition: all 0.3s ease;
+  border-top: 4px solid var(--primary-color);
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
 .feature-box:hover {
@@ -589,6 +581,33 @@
   font-size: 1rem;
   line-height: 1.5;
   margin: 0;
+}
+
+.faq-section .faq-box {
+  background: white;
+  padding: 2rem;
+  border-radius: 8px;
+  margin-bottom: 1.5rem;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  border-top: 4px solid var(--primary-color);
+}
+
+/* Verification UI Styles */
+.verification-sent {
+  text-align: center;
+  padding: 2rem;
+}
+
+.verification-sent .icon-container {
+  color: var(--primary-color);
+}
+
+.verification-sent .title {
+  color: #333;
+}
+
+.verification-sent strong {
+  color: var(--primary-color);
 }
 
 /* Responsive adjustments */
