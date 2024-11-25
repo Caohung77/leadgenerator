@@ -135,7 +135,7 @@
 
 .button.is-warning:hover:not([disabled]),
 .button.is-warning:focus:not([disabled]) {
-  background-color: #ff5a12 !important;
+  background-color: hsl(18, 100%, 54%) !important;
   border-color: transparent !important;
   color: white !important;
 }
@@ -185,6 +185,10 @@
 
 .form-header {
   margin-bottom: 2.5rem;
+}
+
+.text-orange {
+  color: #FF7E23 !important;
 }
 
 .styled-form .field {
