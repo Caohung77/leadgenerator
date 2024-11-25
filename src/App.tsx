@@ -21,19 +21,43 @@ function App() {
     try {
       // Encode the form data
       const formData = {
+        email,
         industry,
         location,
-        email,
-        timestamp: Date.now(), // Add timestamp for extra security
+        timestamp: Date.now()
       };
-      
+
       const encodedData = btoa(JSON.stringify(formData));
+      
+      // Use localhost for development, Vercel URL for production
+      const baseUrl = import.meta.env.DEV 
+        ? 'http://localhost:5173' 
+        : 'https://leadgenerator-bxxf-btchhrbbp-aiwhisps-projects.vercel.app';
+      
+      const verifyUrl = `${baseUrl}/verify/${encodedData}`;
 
-      // Use the correct Vercel deployment URL
-      const verifyUrl = `https://leadgenerator-bxxf-btchhrbbp-aiwhisps-projects.vercel.app/verify/${encodedData}`;
+      // Send verification request to webhook
+      const response = await fetch('https://n8n.theaiwhisperer.cloud/webhook-test/leadgenerator/verify', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          type: 'verification_request',
+          email,
+          data: encodedData,
+          verifyUrl
+        }),
+      });
 
-      // Removed webhook call and implemented local verification
-      setVerificationSent(true);
+      const data = await response.json();
+      
+      // Check if we got a successful response (email sent)
+      if (data.id) {
+        setVerificationSent(true);
+      } else {
+        throw new Error('Failed to send verification email');
+      }
     } catch (error) {
       console.error('Error:', error);
       setError('Es gab einen Fehler bei der Verbindung. Bitte versuche es später erneut.');
@@ -116,6 +140,7 @@ function App() {
     const { token } = useParams();
     const [verifying, setVerifying] = useState(true);
     const [verificationStatus, setVerificationStatus] = useState<'success' | 'error'>('error');
+    const [verificationData, setVerificationData] = useState<any>(null);
 
     useEffect(() => {
       const verify = async () => {
@@ -127,14 +152,25 @@ function App() {
 
           // Decode and validate the token
           const decodedData = JSON.parse(atob(token));
-          console.log('Decoded data:', decodedData);
 
-          // Check if we have all required fields
-          if (decodedData.email && decodedData.industry && decodedData.location) {
-            setVerificationStatus('success');
-          } else {
+          // Validate required fields
+          if (!decodedData.email || !decodedData.industry || !decodedData.location) {
             setVerificationStatus('error');
+            return;
           }
+
+          // Validate timestamp (48 hour expiry)
+          const now = Date.now();
+          const tokenTime = decodedData.timestamp;
+          const twoDays = 48 * 60 * 60 * 1000;
+          
+          if (now - tokenTime > twoDays) {
+            setVerificationStatus('error');
+            return;
+          }
+
+          setVerificationData(decodedData);
+          setVerificationStatus('success');
         } catch (error) {
           console.error('Verification error:', error);
           setVerificationStatus('error');
@@ -151,7 +187,7 @@ function App() {
         case 'success':
           return {
             title: 'Verifizierung erfolgreich!',
-            message: 'Vielen Dank für die Bestätigung Ihrer E-Mail-Adresse. Wir werden uns in Kürze mit Ihren Leads bei Ihnen melden.',
+            message: `Vielen Dank für die Bestätigung Ihrer E-Mail-Adresse ${verificationData?.email}. Wir werden uns in Kürze mit Ihren Leads bei Ihnen melden.`,
             icon: (
               <svg className="w-16 h-16 mx-auto text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7"></path>
@@ -162,7 +198,7 @@ function App() {
         default:
           return {
             title: 'Verifizierung fehlgeschlagen',
-            message: 'Es gab einen Fehler bei der Verifizierung. Bitte versuche es erneut.',
+            message: 'Der Verifizierungslink ist ungültig oder abgelaufen. Bitte fordern Sie einen neuen Link an.',
             icon: (
               <svg className="w-16 h-16 mx-auto text-red-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
