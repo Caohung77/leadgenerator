@@ -11,6 +11,7 @@ function App() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [verificationSent, setVerificationSent] = useState(false);
   const [error, setError] = useState('');
+  const [verificationStatus, setVerificationStatus] = useState('');
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -58,8 +59,21 @@ function App() {
   };
 
   // Add verification handler
-  const handleVerification = async (encodedData: string) => {
+  const handleVerification = async (token: string) => {
     try {
+      const decodedData = JSON.parse(atob(token));
+      
+      // Check if the verification link has expired (1 hour)
+      const timestamp = decodedData.timestamp;
+      const now = Date.now();
+      const oneHour = 60 * 60 * 1000;
+      
+      if (now - timestamp > oneHour) {
+        setVerificationStatus('expired');
+        return;
+      }
+
+      // Send verification confirmation to webhook
       const response = await fetch('https://n8n.theaiwhisperer.cloud/webhook-test/leadgenerator/verify', {
         method: 'POST',
         headers: {
@@ -67,17 +81,39 @@ function App() {
         },
         body: JSON.stringify({
           type: 'process_verification',
-          data: encodedData
+          data: token,
         }),
       });
 
-      if (response.ok) {
-        return true;
+      if (!response.ok) {
+        throw new Error('Verification failed');
       }
-      return false;
+
+      setVerificationStatus('success');
     } catch (error) {
       console.error('Verification error:', error);
-      return false;
+      setVerificationStatus('error');
+    }
+  };
+
+  const getVerificationMessage = () => {
+    switch (verificationStatus) {
+      case 'success':
+        return {
+          title: 'Verifizierung erfolgreich!',
+          message: 'Vielen Dank für die Bestätigung Ihrer E-Mail-Adresse. Wir werden uns in Kürze mit Ihren Leads bei Ihnen melden.',
+        };
+      case 'expired':
+        return {
+          title: 'Verifizierungslink abgelaufen',
+          message: 'Der Verifizierungslink ist abgelaufen. Bitte fordern Sie einen neuen Link an.',
+        };
+      case 'error':
+      default:
+        return {
+          title: 'Verifizierung fehlgeschlagen',
+          message: 'Es gab einen Fehler bei der Verifizierung. Bitte versuche es erneut.',
+        };
     }
   };
 
@@ -85,19 +121,13 @@ function App() {
   const VerificationPage = () => {
     const { token } = useParams();
     const [verifying, setVerifying] = useState(true);
-    const [success, setSuccess] = useState(false);
     const navigate = useNavigate();
 
     useEffect(() => {
       const verify = async () => {
         if (token) {
-          const verified = await handleVerification(token);
-          setSuccess(verified);
+          await handleVerification(token);
           setVerifying(false);
-          if (verified) {
-            // Redirect to home after 5 seconds
-            setTimeout(() => navigate('/'), 5000);
-          }
         }
       };
       verify();
@@ -114,19 +144,17 @@ function App() {
 
     return (
       <div className="box">
-        {success ? (
-          <>
-            <h2 className="title is-3 mb-4">E-Mail erfolgreich verifiziert!</h2>
-            <p>Deine Leads werden in Kürze an deine E-Mail-Adresse gesendet.</p>
-            <p className="mt-4">Du wirst in wenigen Sekunden zur Startseite weitergeleitet.</p>
-          </>
-        ) : (
-          <>
-            <h2 className="title is-3 mb-4">Verifizierung fehlgeschlagen</h2>
-            <p>Es gab einen Fehler bei der Verifizierung. Bitte versuche es erneut.</p>
-            <Link to="/" className="button is-primary mt-4">Zurück zur Startseite</Link>
-          </>
-        )}
+        <div className="text-center">
+          <h2 className="text-2xl font-semibold mb-4">{getVerificationMessage().title}</h2>
+          <p className="text-gray-600">{getVerificationMessage().message}</p>
+          {verificationStatus === 'success' && (
+            <div className="mt-4">
+              <svg className="w-16 h-16 mx-auto text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7"></path>
+              </svg>
+            </div>
+          )}
+        </div>
       </div>
     );
   };
