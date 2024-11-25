@@ -164,7 +164,7 @@ function App() {
           const tokenTime = decodedData.timestamp;
           const twoDays = 48 * 60 * 60 * 1000;
           
-          if (now - tokenTime > twoDays) {
+          if (Math.abs(now - tokenTime) > twoDays) {
             setVerificationStatus('error');
             return;
           }
