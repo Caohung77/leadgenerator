@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { BrowserRouter as Router, Routes, Route, Link, useParams, useNavigate } from 'react-router-dom';
 import { Building2, MapPin, Mail, ChevronRight, Target, Zap, BarChart, CheckCircle } from 'lucide-react';
 import Impressum from './components/Impressum';
@@ -36,8 +36,8 @@ function App() {
       
       const verifyUrl = `${baseUrl}/verify/${encodedData}`;
 
-      // Send verification request to webhook
-      const response = await fetch('https://n8n.theaiwhisperer.cloud/webhook-test/leadgenerator/verify', {
+      // Send verification request
+      const response = await fetch('https://n8n.theaiwhisperer.cloud/webhook/leadgenerator/verify', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -50,14 +50,11 @@ function App() {
         }),
       });
 
-      const data = await response.json();
-      
-      // Check if we got a successful response (email sent)
-      if (data.id) {
-        setVerificationSent(true);
-      } else {
+      if (!response.ok) {
         throw new Error('Failed to send verification email');
       }
+
+      setVerificationSent(true);
     } catch (error) {
       console.error('Error:', error);
       setError('Es gab einen Fehler bei der Verbindung. Bitte versuche es später erneut.');
@@ -141,45 +138,89 @@ function App() {
     const [verifying, setVerifying] = useState(true);
     const [verificationStatus, setVerificationStatus] = useState<'success' | 'error'>('error');
     const [verificationData, setVerificationData] = useState<any>(null);
+    const [debugInfo, setDebugInfo] = useState('');
+    const mounted = useRef(false);
 
     useEffect(() => {
       const verify = async () => {
+        // Only run once when mounted
+        if (mounted.current) return;
+        mounted.current = true;
+
         try {
           if (!token) {
+            setDebugInfo('No token provided');
             setVerificationStatus('error');
             return;
           }
 
           // Decode and validate the token
           const decodedData = JSON.parse(atob(token));
+          console.log('Decoded verification data:', decodedData);
+          setDebugInfo(JSON.stringify(decodedData, null, 2));
 
-          // Validate required fields
-          if (!decodedData.email || !decodedData.industry || !decodedData.location) {
-            setVerificationStatus('error');
-            return;
-          }
-
-          // Validate timestamp (48 hour expiry)
-          const now = Date.now();
-          const tokenTime = decodedData.timestamp;
-          const twoDays = 48 * 60 * 60 * 1000;
-          
-          if (Math.abs(now - tokenTime) > twoDays) {
-            setVerificationStatus('error');
-            return;
-          }
-
+          // Set success first
           setVerificationData(decodedData);
           setVerificationStatus('success');
+
+          // Send verification data to n8n
+          const webhookPayload = {
+            type: 'process_verification',
+            email: decodedData.email,
+            industry: decodedData.industry,
+            location: decodedData.location,
+            verifiedAt: Date.now(),
+            data: token
+          };
+
+          console.log('Sending verification completion to n8n...', webhookPayload);
+          
+          try {
+            const response = await fetch('https://n8n.theaiwhisperer.cloud/webhook/leadgenerator/verify', {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json',
+              },
+              body: JSON.stringify(webhookPayload),
+            });
+
+            let responseText;
+            try {
+              responseText = await response.text();
+              const responseData = JSON.parse(responseText);
+              console.log('N8n response:', responseData);
+              setDebugInfo(prev => prev + '\n\nWebhook Response: ' + JSON.stringify(responseData, null, 2));
+            } catch (e) {
+              console.log('Raw response:', responseText);
+              setDebugInfo(prev => prev + '\n\nRaw Response: ' + responseText);
+            }
+
+            if (!response.ok) {
+              throw new Error(`Webhook failed: ${response.status} ${response.statusText}`);
+            }
+
+            console.log('Verification processed successfully');
+            setDebugInfo(prev => prev + '\n\nWebhook Success: Verification processed');
+
+          } catch (webhookError) {
+            console.error('Webhook error:', webhookError);
+            setDebugInfo(prev => prev + '\n\nWebhook Error: ' + (webhookError instanceof Error ? webhookError.message : String(webhookError)));
+          }
+
         } catch (error) {
           console.error('Verification error:', error);
-          setVerificationStatus('error');
+          setDebugInfo(prev => prev + '\n\nError: ' + (error instanceof Error ? error.message : String(error)));
         } finally {
           setVerifying(false);
         }
       };
 
       verify();
+
+      // Cleanup function
+      return () => {
+        mounted.current = false;
+      };
     }, [token]);
 
     const getMessage = () => {
@@ -223,6 +264,11 @@ function App() {
                   <h2 className="text-2xl font-semibold mb-4">{getMessage().title}</h2>
                   <p className="text-gray-600 mb-6">{getMessage().message}</p>
                   <div className="mt-4 mb-6">{getMessage().icon}</div>
+                  {import.meta.env.DEV && debugInfo && (
+                    <pre className="mt-4 p-4 bg-gray-100 rounded text-left text-sm overflow-auto">
+                      {debugInfo}
+                    </pre>
+                  )}
                   <Link 
                     to="/" 
                     className="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-cyan-600 hover:bg-cyan-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-cyan-500"
