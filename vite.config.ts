@@ -7,6 +7,12 @@ export default defineConfig({
   optimizeDeps: {
     exclude: ['lucide-react'],
   },
+  base: '/',
+  preview: {
+    port: 5173,
+    host: true,
+    strictPort: true,
+  },
   build: {
     minify: 'terser',
     cssMinify: true,
