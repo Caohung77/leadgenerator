@@ -116,8 +116,8 @@ function App() {
                     <div className="column is-5 is-offset-1">
                       <div className="box form-container" id="generator">
                         <div className="form-header has-text-centered">
-                          <h2 className="title is-2 mb-2 is-orange">Lead-Generator</h2>
-                          <p className="subtitle is-5 has-text-grey">
+                          <h2 className="title is-2 mb-2" style={{ color: '#FF7E23' }}>Lead-Generator</h2>
+                          <p className="subtitle is-5" style={{ color: '#FF7E23' }}>
                             Starte jetzt mit der Lead-Generierung
                           </p>
                         </div>
