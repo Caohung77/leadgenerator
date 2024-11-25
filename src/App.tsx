@@ -28,8 +28,8 @@ function App() {
       
       const encodedData = btoa(JSON.stringify(formData));
 
-      // Use official Vercel deployment URL
-      const verifyUrl = `https://leadgenerator-n7nnjf1lv-aiwhisps-projects.vercel.app/verify/${encodedData}`;
+      // Use the latest Vercel deployment URL
+      const verifyUrl = `https://leadgenerator-caohung77.vercel.app/verify/${encodedData}`;
 
       const response = await fetch('https://n8n.theaiwhisperer.cloud/webhook-test/leadgenerator/verify', {
         method: 'POST',
