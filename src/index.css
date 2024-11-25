@@ -187,7 +187,8 @@
   margin-bottom: 2.5rem;
 }
 
-.text-orange {
+.form-header .title,
+.form-header .subtitle {
   color: #FF7E23 !important;
 }
 
