@@ -13,30 +13,25 @@ function App() {
   const [error, setError] = useState('');
   const [verificationStatus, setVerificationStatus] = useState('');
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setIsSubmitting(true);
     setError('');
 
     try {
-      // Encode the form data
       const formData = {
         email,
         industry,
-        location,
-        timestamp: Date.now()
+        location
       };
 
-      const encodedData = btoa(JSON.stringify(formData));
-      
-      // Use localhost for development, Vercel URL for production
-      const baseUrl = import.meta.env.DEV 
-        ? 'http://localhost:5173' 
-        : 'https://leadgenerator-bxxf-btchhrbbp-aiwhisps-projects.vercel.app';
-      
-      const verifyUrl = `${baseUrl}/verify/${encodedData}`;
+      // Create verification token
+      const token = btoa(JSON.stringify({
+        ...formData,
+        timestamp: Date.now()
+      }));
 
-      // Send verification request
+      // Send verification request to n8n
       const response = await fetch('https://n8n.theaiwhisperer.cloud/webhook/leadgenerator/verify', {
         method: 'POST',
         headers: {
@@ -44,9 +39,9 @@ function App() {
         },
         body: JSON.stringify({
           type: 'verification_request',
-          email,
-          data: encodedData,
-          verifyUrl
+          email: formData.email,
+          data: token,
+          verifyUrl: `https://leadgenerator-blond.vercel.app/verify/${token}`
         }),
       });
 
@@ -55,9 +50,9 @@ function App() {
       }
 
       setVerificationSent(true);
-    } catch (error) {
-      console.error('Error:', error);
-      setError('Es gab einen Fehler bei der Verbindung. Bitte versuche es später erneut.');
+    } catch (err) {
+      console.error('Submission error:', err);
+      setError('Ein Fehler ist aufgetreten. Bitte versuchen Sie es später erneut.');
     } finally {
       setIsSubmitting(false);
     }
@@ -102,7 +97,7 @@ function App() {
       case 'success':
         return {
           title: 'Verifizierung erfolgreich!',
-          message: 'Vielen Dank für die Bestätigung Ihrer E-Mail-Adresse. Wir werden uns in Kürze mit Ihren Leads bei Ihnen melden.',
+          message: `Vielen Dank für die Bestätigung Ihrer E-Mail-Adresse ${verificationData?.email}. Wir werden uns in Kürze mit Ihren Leads bei Ihnen melden.`,
           icon: (
             <svg className="w-16 h-16 mx-auto text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7"></path>
@@ -123,7 +118,7 @@ function App() {
       default:
         return {
           title: 'Verifizierung fehlgeschlagen',
-          message: 'Es gab einen Fehler bei der Verifizierung. Bitte versuche es erneut.',
+          message: 'Der Verifizierungslink ist ungültig oder abgelaufen. Bitte fordern Sie einen neuen Link an.',
           icon: (
             <svg className="w-16 h-16 mx-auto text-red-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
@@ -140,6 +135,7 @@ function App() {
     const [verificationData, setVerificationData] = useState<any>(null);
     const [debugInfo, setDebugInfo] = useState('');
     const mounted = useRef(false);
+    const navigate = useNavigate();
 
     useEffect(() => {
       const verify = async () => {
@@ -226,26 +222,59 @@ function App() {
     const getMessage = () => {
       switch (verificationStatus) {
         case 'success':
-          return {
-            title: 'Verifizierung erfolgreich!',
-            message: `Vielen Dank für die Bestätigung Ihrer E-Mail-Adresse ${verificationData?.email}. Wir werden uns in Kürze mit Ihren Leads bei Ihnen melden.`,
-            icon: (
-              <svg className="w-16 h-16 mx-auto text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7"></path>
-              </svg>
-            )
-          };
+          return (
+            <div className="box has-text-centered">
+              <h2 className="title is-3 mb-5">Verifizierung erfolgreich!</h2>
+              <p className="subtitle is-5 mb-5">
+                Vielen Dank für die Bestätigung Ihrer E-Mail-Adresse <strong>{verificationData?.email}</strong>. 
+                Wir werden uns in Kürze mit Ihren Leads bei Ihnen melden.
+              </p>
+              <div className="mb-6">
+                <svg style={{ width: '64px', height: '64px', margin: '0 auto', color: '#48c774' }} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7"></path>
+                </svg>
+              </div>
+              <div className="buttons is-centered">
+                <a 
+                  className="button is-info is-medium" 
+                  href="/" 
+                  onClick={(e) => { 
+                    e.preventDefault(); 
+                    window.location.reload(); 
+                  }}
+                >
+                  Zurück zur Startseite
+                </a>
+              </div>
+            </div>
+          );
         case 'error':
         default:
-          return {
-            title: 'Verifizierung fehlgeschlagen',
-            message: 'Der Verifizierungslink ist ungültig oder abgelaufen. Bitte fordern Sie einen neuen Link an.',
-            icon: (
-              <svg className="w-16 h-16 mx-auto text-red-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-              </svg>
-            )
-          };
+          return (
+            <div className="bg-white p-6 rounded-lg shadow-lg text-center">
+              <h2 className="text-3xl font-bold text-red-600 mb-4">Fehler!</h2>
+              <p className="text-lg text-gray-700 mb-6">
+                Der Verifizierungslink ist ungültig oder abgelaufen. Bitte fordern Sie einen neuen Link an.
+              </p>
+              <button
+                onClick={() => window.location.reload()}
+                style={{
+                  backgroundColor: '#2563eb',
+                  color: 'white',
+                  padding: '12px 24px',
+                  border: 'none',
+                  borderRadius: '6px',
+                  fontSize: '16px',
+                  cursor: 'pointer',
+                  transition: 'background-color 0.3s',
+                }}
+                onMouseOver={(e) => e.currentTarget.style.backgroundColor = '#1d4ed8'}
+                onMouseOut={(e) => e.currentTarget.style.backgroundColor = '#2563eb'}
+              >
+                Zurück zur Startseite
+              </button>
+            </div>
+          );
       }
     };
 
@@ -255,27 +284,15 @@ function App() {
           <div className="bg-white rounded-lg shadow-xl p-8">
             <div className="text-center">
               {verifying ? (
-                <>
-                  <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-cyan-600 mx-auto"></div>
-                  <p className="mt-4 text-gray-600">Verifizierung läuft...</p>
-                </>
+                <div className="box has-text-centered">
+                  <div className="mb-4">
+                    <button className="button is-info is-loading is-large" style={{ background: 'transparent', border: 'none' }}></button>
+                  </div>
+                  <p className="subtitle is-5">Verifizierung läuft...</p>
+                  <p className="is-size-7 has-text-grey">Dies kann einen Moment dauern.</p>
+                </div>
               ) : (
-                <>
-                  <h2 className="text-2xl font-semibold mb-4">{getMessage().title}</h2>
-                  <p className="text-gray-600 mb-6">{getMessage().message}</p>
-                  <div className="mt-4 mb-6">{getMessage().icon}</div>
-                  {import.meta.env.DEV && debugInfo && (
-                    <pre className="mt-4 p-4 bg-gray-100 rounded text-left text-sm overflow-auto">
-                      {debugInfo}
-                    </pre>
-                  )}
-                  <Link 
-                    to="/" 
-                    className="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-cyan-600 hover:bg-cyan-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-cyan-500"
-                  >
-                    Zurück zur Startseite
-                  </Link>
-                </>
+                getMessage()
               )}
             </div>
           </div>
@@ -352,18 +369,20 @@ function App() {
   const renderVerificationSent = () => (
     <div className="verification-sent">
       <div className="icon-container mb-4">
-        <Mail className="feature-icon" size={48} />
+        <Mail className="lucide lucide-mail feature-icon" size={48} />
       </div>
       <h3 className="title is-4 mb-4">Bestätige deine E-Mail-Adresse</h3>
-      <p className="mb-4">
-        Wir haben dir eine E-Mail mit einem Bestätigungslink an <strong>{email}</strong> gesendet.
-      </p>
-      <p className="mb-4">
-        Bitte überprüfe dein Postfach und klicke auf den Link, um deine Leads zu erhalten.
-      </p>
-      <p className="has-text-grey is-size-7">
-        Hinweis: Die E-Mail kann einige Minuten dauern. Überprüfe auch deinen Spam-Ordner.
-      </p>
+      <p className="mb-4">Wir haben dir eine E-Mail mit einem Bestätigungslink an <strong>{email}</strong> gesendet.</p>
+      <p className="mb-4">Bitte überprüfe dein Postfach und klicke auf den Link, um deine Leads zu erhalten.</p>
+      <p className="has-text-grey is-size-7">Hinweis: Die E-Mail kann einige Minuten dauern. Überprüfe auch deinen Spam-Ordner.</p>
+      <div className="has-text-centered mt-5">
+        <button
+          onClick={() => window.location.reload()}
+          className="button is-info"
+        >
+          Weiter
+        </button>
+      </div>
     </div>
   );
 
