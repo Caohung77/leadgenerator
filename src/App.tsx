@@ -12,7 +12,7 @@ function App() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [verificationSent, setVerificationSent] = useState(false);
   const [error, setError] = useState('');
-  const [verificationStatus, setVerificationStatus] = useState('loading');
+  const [verificationStatus, setVerificationStatus] = useState('');
   const [verificationSuccess, setVerificationSuccess] = useState(false);
   const [verificationError, setVerificationError] = useState(false);
 
@@ -75,7 +75,7 @@ function App() {
           type: 'verification_request',
           email: email,
           data: token,
-          verifyUrl: `https://leadgenerator-blond.vercel.app/verifying.html?token=${token}`
+          verifyUrl: `${window.location.origin}/verify?token=${token}`
         }),
       });
 
@@ -410,42 +410,49 @@ function App() {
           </>
         } />
 
-        <Route path="/verify/:token" element={
+        <Route path="/verify/success" element={
           <div className="min-h-screen bg-gray-100 flex items-center justify-center">
             <div className="w-full max-w-md mx-4">
               <div className="bg-white rounded-lg shadow-xl p-8">
-                {verificationStatus === 'loading' && (
-                  <div className="text-center">
-                    <div className="loading-spinner mb-4"></div>
-                    <p className="mt-4 text-gray-600">E-Mail wird verifiziert...</p>
+                <div className="text-center">
+                  <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                    <CheckCircle className="w-8 h-8 text-green-500" />
                   </div>
-                )}
-                {verificationStatus === 'success' && (
-                  <div className="text-center">
-                    <h2 className="text-2xl font-bold text-gray-800 mb-4">
-                      E-Mail erfolgreich verifiziert!
-                    </h2>
-                    <p className="text-gray-600 mb-6">
-                      Ihre E-Mail-Adresse wurde erfolgreich verifiziert. Sie können diese Seite jetzt schließen.
-                    </p>
-                    <Link to="/" className="button is-blue">
-                      Zurück zur Startseite
-                    </Link>
+                  <h2 className="text-2xl font-bold text-gray-800 mb-4">
+                    E-Mail erfolgreich verifiziert!
+                  </h2>
+                  <p className="text-gray-600 mb-6">
+                    Ihre E-Mail-Adresse wurde erfolgreich verifiziert. Sie erhalten in Kürze Ihre Leads.
+                  </p>
+                  <Link to="/" className="button is-blue">
+                    Zurück zur Startseite
+                  </Link>
+                </div>
+              </div>
+            </div>
+          </div>
+        } />
+
+        <Route path="/verify/error" element={
+          <div className="min-h-screen bg-gray-100 flex items-center justify-center">
+            <div className="w-full max-w-md mx-4">
+              <div className="bg-white rounded-lg shadow-xl p-8">
+                <div className="text-center">
+                  <div className="w-16 h-16 bg-red-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                    <svg className="w-8 h-8 text-red-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12"></path>
+                    </svg>
                   </div>
-                )}
-                {verificationStatus === 'error' && (
-                  <div className="text-center">
-                    <h2 className="text-2xl font-bold text-red-600 mb-4">
-                      Verifizierung fehlgeschlagen
-                    </h2>
-                    <p className="text-gray-600 mb-6">
-                      {error || 'Ein Fehler ist aufgetreten. Bitte versuchen Sie es später erneut.'}
-                    </p>
-                    <Link to="/" className="button is-blue">
-                      Zurück zur Startseite
-                    </Link>
-                  </div>
-                )}
+                  <h2 className="text-2xl font-bold text-red-600 mb-4">
+                    Verifizierung fehlgeschlagen
+                  </h2>
+                  <p className="text-gray-600 mb-6">
+                    Ein Fehler ist aufgetreten. Bitte versuchen Sie es später erneut.
+                  </p>
+                  <Link to="/" className="button is-blue">
+                    Zurück zur Startseite
+                  </Link>
+                </div>
               </div>
             </div>
           </div>
