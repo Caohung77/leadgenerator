@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Routes, Route, Link, useParams, useNavigate } 
 import { Building2, MapPin, Mail, ChevronRight, Target, Zap, BarChart, CheckCircle } from 'lucide-react';
 import Impressum from './components/Impressum';
 import Datenschutz from './components/Datenschutz';
+import { supabase } from './supabaseClient';
 
 function App() {
   const [industry, setIndustry] = useState('');
@@ -12,6 +13,8 @@ function App() {
   const [verificationSent, setVerificationSent] = useState(false);
   const [error, setError] = useState('');
   const [verificationStatus, setVerificationStatus] = useState('');
+  const [verificationSuccess, setVerificationSuccess] = useState(false);
+  const [verificationError, setVerificationError] = useState(false);
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -19,15 +22,46 @@ function App() {
     setError('');
 
     try {
-      const formData = {
-        email,
-        industry,
-        location
-      };
+      // First check if email exists
+      const { data: existingEmail } = await supabase
+        .from('emails')
+        .select('email, verified')
+        .eq('email', email)
+        .single();
+
+      if (existingEmail) {
+        // If email exists but not verified, allow resending verification
+        if (!existingEmail.verified) {
+          // Update the industry and location
+          const { error: updateError } = await supabase
+            .from('emails')
+            .update({ industry, location })
+            .eq('email', email);
+
+          if (updateError) throw updateError;
+        } else {
+          setError('Diese E-Mail-Adresse wurde bereits verifiziert.');
+          setIsSubmitting(false);
+          return;
+        }
+      } else {
+        // New email, insert it
+        const { error: insertError } = await supabase
+          .from('emails')
+          .insert([{ 
+            email: email,
+            industry: industry,
+            location: location
+          }]);
+
+        if (insertError) throw insertError;
+      }
 
       // Create verification token
       const token = btoa(JSON.stringify({
-        ...formData,
+        email,
+        industry,
+        location,
         timestamp: Date.now()
       }));
 
@@ -39,20 +73,26 @@ function App() {
         },
         body: JSON.stringify({
           type: 'verification_request',
-          email: formData.email,
+          email: email,
           data: token,
-          verifyUrl: `https://leadgenerator-blond.vercel.app/verify/${token}`
+          verifyUrl: `https://leadgenerator-blond.vercel.app/verifying.html?token=${token}`
         }),
       });
 
       if (!response.ok) {
-        throw new Error('Failed to send verification email');
+        const responseText = await response.text();
+        console.error('Webhook error:', responseText);
+        throw new Error(`Webhook error: ${response.status} ${responseText}`);
       }
 
       setVerificationSent(true);
-    } catch (err) {
-      console.error('Submission error:', err);
-      setError('Ein Fehler ist aufgetreten. Bitte versuchen Sie es später erneut.');
+    } catch (error) {
+      console.error('Detailed error:', error);
+      if (error.code === '23505') { // Postgres unique violation code
+        setError('Diese E-Mail-Adresse wurde bereits registriert.');
+      } else {
+        setError('Ein Fehler ist aufgetreten. Bitte versuchen Sie es später erneut.');
+      }
     } finally {
       setIsSubmitting(false);
     }
@@ -61,34 +101,22 @@ function App() {
   // Add verification handler
   const handleVerification = async (token: string) => {
     try {
-      console.log('Starting verification with token:', token);
+      // Decode the token
       const decodedData = JSON.parse(atob(token));
-      console.log('Decoded data:', decodedData);
-      
-      // Check if the verification link has expired (1 hour)
-      const timestamp = decodedData.timestamp;
-      const now = Date.now();
-      const oneHour = 60 * 60 * 1000;
-      
-      if (now - timestamp > oneHour) {
-        console.log('Link expired');
-        setVerificationStatus('expired');
-        return;
-      }
+      const { email } = decodedData;
 
-      console.log('Processing verification...');
-      
-      // Instead of making another API call, just verify the data we have
-      if (decodedData.email && decodedData.industry && decodedData.location) {
-        console.log('Verification data is valid');
-        setVerificationStatus('success');
-      } else {
-        console.log('Invalid verification data');
-        setVerificationStatus('error');
-      }
+      // Update email verification status in Supabase
+      const { error } = await supabase
+        .from('emails')
+        .update({ verified: true })
+        .eq('email', email);
+
+      if (error) throw error;
+
+      setVerificationSuccess(true);
     } catch (error) {
       console.error('Verification error:', error);
-      setVerificationStatus('error');
+      setVerificationError(true);
     }
   };
 
@@ -133,168 +161,110 @@ function App() {
     const [verifying, setVerifying] = useState(true);
     const [verificationStatus, setVerificationStatus] = useState<'success' | 'error'>('error');
     const [verificationData, setVerificationData] = useState<any>(null);
-    const [debugInfo, setDebugInfo] = useState('');
     const mounted = useRef(false);
-    const navigate = useNavigate();
 
     useEffect(() => {
       const verify = async () => {
-        // Only run once when mounted
         if (mounted.current) return;
         mounted.current = true;
 
         try {
           if (!token) {
-            setDebugInfo('No token provided');
             setVerificationStatus('error');
+            setVerifying(false);
             return;
           }
 
-          // Decode and validate the token
+          // Show loading state for at least 1 second
+          const startTime = Date.now();
+
+          // Decode and process verification
           const decodedData = JSON.parse(atob(token));
-          console.log('Decoded verification data:', decodedData);
-          setDebugInfo(JSON.stringify(decodedData, null, 2));
-
-          // Set success first
           setVerificationData(decodedData);
-          setVerificationStatus('success');
 
-          // Send verification data to n8n
-          const webhookPayload = {
-            type: 'process_verification',
-            email: decodedData.email,
-            industry: decodedData.industry,
-            location: decodedData.location,
-            verifiedAt: Date.now(),
-            data: token
-          };
+          // Update verification status in Supabase
+          const { error } = await supabase
+            .from('emails')
+            .update({ verified: true })
+            .eq('email', decodedData.email);
 
-          console.log('Sending verification completion to n8n...', webhookPayload);
-          
-          try {
-            const response = await fetch('https://n8n.theaiwhisperer.cloud/webhook/leadgenerator/verify', {
-              method: 'POST',
-              headers: {
-                'Content-Type': 'application/json',
-              },
-              body: JSON.stringify(webhookPayload),
-            });
+          if (error) throw error;
 
-            let responseText;
-            try {
-              responseText = await response.text();
-              const responseData = JSON.parse(responseText);
-              console.log('N8n response:', responseData);
-              setDebugInfo(prev => prev + '\n\nWebhook Response: ' + JSON.stringify(responseData, null, 2));
-            } catch (e) {
-              console.log('Raw response:', responseText);
-              setDebugInfo(prev => prev + '\n\nRaw Response: ' + responseText);
-            }
-
-            if (!response.ok) {
-              throw new Error(`Webhook failed: ${response.status} ${response.statusText}`);
-            }
-
-            console.log('Verification processed successfully');
-            setDebugInfo(prev => prev + '\n\nWebhook Success: Verification processed');
-
-          } catch (webhookError) {
-            console.error('Webhook error:', webhookError);
-            setDebugInfo(prev => prev + '\n\nWebhook Error: ' + (webhookError instanceof Error ? webhookError.message : String(webhookError)));
+          // Ensure loading shows for at least 1 second
+          const elapsedTime = Date.now() - startTime;
+          if (elapsedTime < 1000) {
+            await new Promise(resolve => setTimeout(resolve, 1000 - elapsedTime));
           }
 
+          setVerificationStatus('success');
         } catch (error) {
           console.error('Verification error:', error);
-          setDebugInfo(prev => prev + '\n\nError: ' + (error instanceof Error ? error.message : String(error)));
+          setVerificationStatus('error');
         } finally {
           setVerifying(false);
         }
       };
 
       verify();
-
-      // Cleanup function
       return () => {
         mounted.current = false;
       };
     }, [token]);
 
-    const getMessage = () => {
-      switch (verificationStatus) {
-        case 'success':
-          return (
-            <div className="box has-text-centered">
-              <h2 className="title is-3 mb-5">Verifizierung erfolgreich!</h2>
-              <p className="subtitle is-5 mb-5">
-                Vielen Dank für die Bestätigung Ihrer E-Mail-Adresse <strong>{verificationData?.email}</strong>. 
-                Wir werden uns in Kürze mit Ihren Leads bei Ihnen melden.
-              </p>
-              <div className="mb-6">
-                <svg style={{ width: '64px', height: '64px', margin: '0 auto', color: '#48c774' }} fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7"></path>
-                </svg>
-              </div>
-              <div className="buttons is-centered">
-                <a 
-                  className="button is-info is-medium" 
-                  href="/" 
-                  onClick={(e) => { 
-                    e.preventDefault(); 
-                    window.location.reload(); 
-                  }}
-                >
-                  Zurück zur Startseite
-                </a>
-              </div>
-            </div>
-          );
-        case 'error':
-        default:
-          return (
-            <div className="bg-white p-6 rounded-lg shadow-lg text-center">
-              <h2 className="text-3xl font-bold text-red-600 mb-4">Fehler!</h2>
-              <p className="text-lg text-gray-700 mb-6">
-                Der Verifizierungslink ist ungültig oder abgelaufen. Bitte fordern Sie einen neuen Link an.
-              </p>
-              <button
-                onClick={() => window.location.reload()}
-                style={{
-                  backgroundColor: '#2563eb',
-                  color: 'white',
-                  padding: '12px 24px',
-                  border: 'none',
-                  borderRadius: '6px',
-                  fontSize: '16px',
-                  cursor: 'pointer',
-                  transition: 'background-color 0.3s',
-                }}
-                onMouseOver={(e) => e.currentTarget.style.backgroundColor = '#1d4ed8'}
-                onMouseOut={(e) => e.currentTarget.style.backgroundColor = '#2563eb'}
-              >
-                Zurück zur Startseite
-              </button>
-            </div>
-          );
-      }
-    };
-
     return (
       <div className="min-h-screen bg-gray-100 flex items-center justify-center">
         <div className="w-full max-w-md mx-4">
           <div className="bg-white rounded-lg shadow-xl p-8">
-            <div className="text-center">
-              {verifying ? (
-                <div className="box has-text-centered">
-                  <div className="mb-4">
-                    <button className="button is-info is-loading is-large" style={{ background: 'transparent', border: 'none' }}></button>
-                  </div>
-                  <p className="subtitle is-5">Verifizierung läuft...</p>
-                  <p className="is-size-7 has-text-grey">Dies kann einen Moment dauern.</p>
+            {verifying ? (
+              <div className="box has-text-centered">
+                <div className="mb-5">
+                  <div className="loading-spinner"></div>
                 </div>
-              ) : (
-                getMessage()
-              )}
-            </div>
+                <h2 className="title is-4 mb-4">E-Mail wird verifiziert...</h2>
+                <p className="subtitle is-6 has-text-grey">
+                  Bitte haben Sie einen Moment Geduld, während wir Ihre E-Mail-Adresse verifizieren.
+                </p>
+              </div>
+            ) : verificationStatus === 'success' ? (
+              <div className="box has-text-centered">
+                <div className="mb-5">
+                  <CheckCircle size={64} className="text-green-500" />
+                </div>
+                <h2 className="title is-3 mb-4">Verifizierung erfolgreich!</h2>
+                <p className="subtitle is-5 mb-5">
+                  Vielen Dank für die Bestätigung Ihrer E-Mail-Adresse <strong>{verificationData?.email}</strong>. 
+                  Wir werden uns in Kürze mit Ihren Leads bei Ihnen melden.
+                </p>
+                <div className="mt-6">
+                  <button
+                    onClick={() => window.location.href = '/'}
+                    className="button is-blue"
+                  >
+                    Zurück zur Startseite
+                  </button>
+                </div>
+              </div>
+            ) : (
+              <div className="box has-text-centered">
+                <div className="mb-5">
+                  <svg className="mx-auto h-16 w-16 text-red-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                  </svg>
+                </div>
+                <h2 className="title is-3 mb-4">Verifizierung fehlgeschlagen</h2>
+                <p className="subtitle is-5 mb-5">
+                  Der Verifizierungslink ist ungültig oder abgelaufen. Bitte fordern Sie einen neuen Link an.
+                </p>
+                <div className="mt-6">
+                  <button
+                    onClick={() => window.location.href = '/'}
+                    className="button is-blue"
+                  >
+                    Zurück zur Startseite
+                  </button>
+                </div>
+              </div>
+            )}
           </div>
         </div>
       </div>
@@ -378,7 +348,7 @@ function App() {
       <div className="has-text-centered mt-5">
         <button
           onClick={() => window.location.reload()}
-          className="button is-info"
+          className="button is-blue"
         >
           Weiter
         </button>
