@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { Link, useParams, useNavigate } from 'react-router-dom';
+import { Routes, Route, Link, useParams, useNavigate } from 'react-router-dom';
 import { Building2, MapPin, Mail, ChevronRight, Target, Zap, BarChart, CheckCircle } from 'lucide-react';
 import Impressum from './components/Impressum';
 import Datenschutz from './components/Datenschutz';
