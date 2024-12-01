@@ -328,61 +328,90 @@
 /* New SEO-optimized content styles */
 .hero {
   background: linear-gradient(45deg, #4568dc 0%, #b06ab3 100%);
-  position: relative;
-  overflow: hidden;
+  width: 100%;
+  min-height: calc(100vh - 64px); /* Subtract navbar height */
 }
 
 .hero-body {
   z-index: 1;
+  padding: 3rem 1.5rem;
 }
 
-.title {
-  color: #ffffff !important;
+.hero .container {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 2rem;
 }
 
-.subtitle {
-  color: #ffffff !important;
+.hero .columns {
+  margin: 0 -1rem;
 }
 
-.section-title {
-  color: #363636 !important;
-  margin-bottom: 2rem;
+.hero .column {
+  padding: 1rem;
 }
 
-.title.is-2 {
-  font-weight: 700;
-  line-height: 1.2;
-}
-
-.feature-box {
-  height: 100%;
-  padding: 2rem;
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
-  text-align: center;
-  border-top: 3px solid var(--primary-color);
-}
-
-.feature-box:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 8px 15px rgba(0,0,0,0.1);
-}
-
-.feature-icon {
-  color: var(--primary-color);
-  width: 48px;
-  height: 48px;
+.form-container {
+  background: white;
+  border-radius: 12px;
+  padding: 2.5rem;
+  box-shadow: 0 8px 30px rgba(0,0,0,0.12);
+  width: 100%;
+  max-width: 500px;
   margin: 0 auto;
 }
 
-#how-it-works {
-  background-color: #f8fafc;
-  padding: 5rem 1.5rem;
+.hero h1 {
+  font-size: 3.5rem;
+  line-height: 1.2;
+  margin-bottom: 1.5rem;
+  color: white;
 }
 
-#how-it-works .title.is-3 {
-  text-align: center;
-  margin-bottom: 3rem;
-  color: #2c5282;
+.hero h2 {
+  font-size: 1.5rem;
+  line-height: 1.5;
+  color: rgba(255, 255, 255, 0.9);
+  margin-bottom: 2rem;
+}
+
+.feature-badges {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 2.5rem;
+  flex-wrap: wrap;
+}
+
+.feature-badge {
+  background: rgba(255, 255, 255, 0.2);
+  padding: 0.75rem 1.5rem;
+  border-radius: 9999px;
+  color: white;
+  font-size: 1rem;
+  white-space: nowrap;
+}
+
+@media (max-width: 768px) {
+  .hero h1 {
+    font-size: 2.5rem;
+  }
+  
+  .hero h2 {
+    font-size: 1.25rem;
+  }
+  
+  .hero-body {
+    padding: 2rem 1rem;
+  }
+  
+  .feature-badges {
+    gap: 0.5rem;
+  }
+  
+  .feature-badge {
+    padding: 0.5rem 1rem;
+    font-size: 0.875rem;
+  }
 }
 
 /* CTA Section */

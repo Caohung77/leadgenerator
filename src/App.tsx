@@ -233,26 +233,26 @@ function App() {
         <Routes>
           <Route path="/" element={
             <>
-              <section className="hero is-fullheight-with-navbar">
+              <section className="hero">
                 <div className="hero-body">
                   <div className="container">
                     <div className="columns is-vcentered">
                       <div className="column is-6">
-                        <h1 className="text-4xl font-bold mb-4">
+                        <h1>
                           Leads generieren leicht gemacht
                         </h1>
-                        <h2 className="text-xl mb-8 text-gray-200">
+                        <h2>
                           Finde qualifizierte B2B-Kontakte in deiner Region
                         </h2>
 
-                        <div className="flex gap-4 mb-8">
-                          <span className="px-4 py-2 bg-white bg-opacity-20 rounded-full text-white">
+                        <div className="feature-badges">
+                          <span className="feature-badge">
                             Zielgerichtete Suche
                           </span>
-                          <span className="px-4 py-2 bg-white bg-opacity-20 rounded-full text-white">
+                          <span className="feature-badge">
                             Regionale Kontakte
                           </span>
-                          <span className="px-4 py-2 bg-white bg-opacity-20 rounded-full text-white">
+                          <span className="feature-badge">
                             Sofort nutzbar
                           </span>
                         </div>
