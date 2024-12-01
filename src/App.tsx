@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Routes, Route, Link, useParams, useNavigate } from 'react-router-dom';
-import { Building2, MapPin, Mail, ChevronRight, Target, Zap, BarChart, CheckCircle } from 'lucide-react';
+import { Building2, MapPin, Mail, ChevronRight, Target, Zap, BarChart, CheckCircle, Coins } from 'lucide-react';
 import Impressum from './components/Impressum';
 import Datenschutz from './components/Datenschutz';
 import { supabase } from './supabaseClient';
@@ -250,7 +250,7 @@ function App() {
                       Leads generieren leicht gemacht
                     </h1>
                     <h2 className="subtitle text-xl md:text-2xl text-white/90 mb-8">
-                      Finde qualifizierte B2B-Kontakte in deiner Region
+                      Finde qualifizierte B2B-Kontakte in deiner Region.
                     </h2>
                     <div className="flex flex-wrap gap-3 mb-8">
                       <span className="bg-white/20 text-white px-4 py-2 rounded-full flex items-center gap-2">
@@ -260,7 +260,7 @@ function App() {
                         <MapPin size={20} /> Regionale Kontakte
                       </span>
                       <span className="bg-white/20 text-white px-4 py-2 rounded-full flex items-center gap-2">
-                        <Zap size={20} /> Sofort nutzbar
+                        <Coins size={20} /> Kostenlos
                       </span>
                     </div>
                   </div>
