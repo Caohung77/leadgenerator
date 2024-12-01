@@ -201,22 +201,27 @@ function App() {
   );
 
   const renderVerificationSent = () => (
-    <div className="verification-sent">
-      <div className="icon-container">
-        <Mail className="feature-icon" size={48} />
+    <div className="verification-container">
+      <div className="verification-icon">
+        <Mail className="w-full h-full text-primary" />
       </div>
-      <h3 className="title is-4 mb-4 text-center">Bestätige deine E-Mail-Adresse</h3>
-      <p className="mb-4">Wir haben dir eine E-Mail mit einem Bestätigungslink an <strong>{email}</strong> gesendet.</p>
-      <p className="mb-4">Bitte überprüfe dein Postfach und klicke auf den Link, um deine Leads zu erhalten.</p>
-      <p className="has-text-grey is-size-7">Hinweis: Die E-Mail kann einige Minuten dauern. Überprüfe auch deinen Spam-Ordner.</p>
-      <div className="has-text-centered mt-5">
-        <button
-          onClick={() => window.location.reload()}
-          className="button"
-        >
-          Weiter
-        </button>
-      </div>
+      <h3 className="verification-title">Bestätige deine E-Mail-Adresse</h3>
+      <p className="verification-text">
+        Wir haben dir eine E-Mail mit einem Bestätigungslink an{' '}
+        <span className="verification-email">{email}</span> gesendet.
+      </p>
+      <p className="verification-text">
+        Bitte überprüfe dein Postfach und klicke auf den Link, um deine Leads zu erhalten.
+      </p>
+      <p className="verification-hint">
+        Hinweis: Die E-Mail kann einige Minuten dauern. Überprüfe auch deinen Spam-Ordner.
+      </p>
+      <button
+        onClick={() => window.location.reload()}
+        className="button is-warning verification-button"
+      >
+        Weiter
+      </button>
     </div>
   );
 
