@@ -273,7 +273,7 @@ function App() {
 
               <section className="section features-section bg-white">
                 <div className="container">
-                  <h2 className="title is-3 has-text-centered mb-6">Ihre Vorteile der B2B Lead Generierung</h2>
+                  <h2 className="title is-3 has-text-centered mb-6 text-gray-800">Ihre Vorteile der B2B Lead Generierung</h2>
                   <div className="columns is-multiline">
                     <div className="column is-4">
                       <div className="feature-box">
