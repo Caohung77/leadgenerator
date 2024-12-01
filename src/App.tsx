@@ -134,6 +134,9 @@ function App() {
 
   const renderForm = () => (
     <form onSubmit={handleSubmit} className="styled-form">
+      <h2 className="form-title">Lead-Generator</h2>
+      <p className="form-subtitle">Starte jetzt mit der Lead-Generierung</p>
+      
       <div className="field">
         <label className="label">Branche</label>
         <div className="control">
@@ -199,17 +202,17 @@ function App() {
 
   const renderVerificationSent = () => (
     <div className="verification-sent">
-      <div className="icon-container mb-4">
-        <Mail className="lucide lucide-mail feature-icon" size={48} />
+      <div className="icon-container">
+        <Mail className="feature-icon" size={48} />
       </div>
-      <h3 className="title is-4 mb-4">Bestätige deine E-Mail-Adresse</h3>
+      <h3 className="title is-4 mb-4 text-center">Bestätige deine E-Mail-Adresse</h3>
       <p className="mb-4">Wir haben dir eine E-Mail mit einem Bestätigungslink an <strong>{email}</strong> gesendet.</p>
       <p className="mb-4">Bitte überprüfe dein Postfach und klicke auf den Link, um deine Leads zu erhalten.</p>
       <p className="has-text-grey is-size-7">Hinweis: Die E-Mail kann einige Minuten dauern. Überprüfe auch deinen Spam-Ordner.</p>
       <div className="has-text-centered mt-5">
         <button
           onClick={() => window.location.reload()}
-          className="button is-blue"
+          className="button"
         >
           Weiter
         </button>
@@ -220,10 +223,10 @@ function App() {
   return (
     <div className="app">
       <nav className="navbar">
-        <div className="container">
+        <div className="container mx-auto px-4">
           <div className="navbar-brand">
-            <Link to="/" className="navbar-item" aria-label="Lead Generator Tool Homepage">
-              <img src="/sophia.png" alt="Sophiena Lead Generator Logo" className="logo-image" />
+            <Link to="/" className="flex items-center">
+              <img src="/sophia.png" alt="Sophiena" className="h-12" />
             </Link>
           </div>
         </div>
@@ -233,49 +236,30 @@ function App() {
         <Routes>
           <Route path="/" element={
             <>
-              <section className="hero">
-                <div className="hero-body">
-                  <div className="container">
-                    <div className="columns is-vcentered">
-                      <div className="column is-6">
-                        <h1>
-                          Leads generieren leicht gemacht
-                        </h1>
-                        <h2>
-                          Finde qualifizierte B2B-Kontakte in deiner Region
-                        </h2>
-
-                        <div className="feature-badges">
-                          <span className="feature-badge">
-                            Zielgerichtete Suche
-                          </span>
-                          <span className="feature-badge">
-                            Regionale Kontakte
-                          </span>
-                          <span className="feature-badge">
-                            Sofort nutzbar
-                          </span>
-                        </div>
-
-                        <a href="#generator" className="button is-warning is-medium">
-                          <span>Jetzt Leads generieren</span>
-                          <span className="icon">
-                            <ChevronRight />
-                          </span>
-                        </a>
-                      </div>
-                      <div className="column is-5 is-offset-1">
-                        <div className="box form-container" id="generator">
-                          <div className="form-header has-text-centered">
-                            <h2 className="title is-2 mb-2">Lead-Generator</h2>
-                            <p className="subtitle is-5">
-                              Starte jetzt mit der Lead-Generierung
-                            </p>
-                          </div>
-                          {verificationSent ? renderVerificationSent() : renderForm()}
-                        </div>
-                      </div>
+              <section className="hero is-primary">
+                <div className="hero-content">
+                  <div className="hero-text">
+                    <h1 className="title text-4xl md:text-5xl lg:text-6xl text-white mb-6">
+                      Leads generieren leicht gemacht
+                    </h1>
+                    <h2 className="subtitle text-xl md:text-2xl text-white/90 mb-8">
+                      Finde qualifizierte B2B-Kontakte in deiner Region
+                    </h2>
+                    <div className="flex flex-wrap gap-3 mb-8">
+                      <span className="bg-white/20 text-white px-4 py-2 rounded-full flex items-center gap-2">
+                        <Target size={20} /> Zielgerichtete Suche
+                      </span>
+                      <span className="bg-white/20 text-white px-4 py-2 rounded-full flex items-center gap-2">
+                        <MapPin size={20} /> Regionale Kontakte
+                      </span>
+                      <span className="bg-white/20 text-white px-4 py-2 rounded-full flex items-center gap-2">
+                        <Zap size={20} /> Sofort nutzbar
+                      </span>
                     </div>
+                  </div>
+
+                  <div className="hero-form">
+                    {verificationSent ? renderVerificationSent() : renderForm()}
                   </div>
                 </div>
               </section>
