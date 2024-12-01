@@ -38,6 +38,7 @@
   min-height: auto;
   display: flex;
   align-items: center;
+  margin-top: 72px;
 }
 
 .hero-content {
@@ -74,6 +75,7 @@
   width: 100%;
   top: 0;
   z-index: 30;
+  height: 72px;
 }
 
 .navbar-brand {
@@ -280,14 +282,15 @@
 
 @media (max-width: 768px) {
   .hero.is-primary {
-    padding: 2rem 1rem;
+    padding: 3rem 1rem;
     min-height: auto;
-    text-align: left;
+    margin-top: 60px;
   }
 
   .hero-content {
     flex-direction: column;
     padding: 0;
+    gap: 2rem;
   }
 
   .hero-text {
@@ -329,6 +332,10 @@
   .feature-badge {
     font-size: 0.9rem;
     padding: 0.5rem 1rem;
+  }
+
+  .navbar {
+    height: 60px;
   }
 }
 
