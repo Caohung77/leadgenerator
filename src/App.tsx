@@ -238,20 +238,31 @@ function App() {
                   <div className="container">
                     <div className="columns is-vcentered">
                       <div className="column is-6">
-                        <h1 className="text-4xl font-bold mb-6">
-                          Professionelle B2B Lead Generierung
+                        <h1 className="text-4xl font-bold mb-4">
+                          Leads generieren leicht gemacht
                         </h1>
-                        <h2 className="text-2xl mb-8 text-gray-600">
-                          Gewinnen Sie qualifizierte Business Kontakte in Ihrer Region
+                        <h2 className="text-xl mb-8 text-gray-200">
+                          Finde qualifizierte B2B-Kontakte in deiner Region
                         </h2>
-                        <div className="buttons">
-                          <a href="#generator" className="button is-warning is-medium">
-                            <span>Jetzt Leads generieren</span>
-                            <span className="icon">
-                              <ChevronRight />
-                            </span>
-                          </a>
+
+                        <div className="flex gap-4 mb-8">
+                          <span className="px-4 py-2 bg-white bg-opacity-20 rounded-full text-white">
+                            Zielgerichtete Suche
+                          </span>
+                          <span className="px-4 py-2 bg-white bg-opacity-20 rounded-full text-white">
+                            Regionale Kontakte
+                          </span>
+                          <span className="px-4 py-2 bg-white bg-opacity-20 rounded-full text-white">
+                            Sofort nutzbar
+                          </span>
                         </div>
+
+                        <a href="#generator" className="button is-warning is-medium">
+                          <span>Jetzt Leads generieren</span>
+                          <span className="icon">
+                            <ChevronRight />
+                          </span>
+                        </a>
                       </div>
                       <div className="column is-5 is-offset-1">
                         <div className="box form-container" id="generator">
