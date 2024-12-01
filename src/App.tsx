@@ -302,7 +302,7 @@ function App() {
 
               <section className="section steps-section">
                 <div className="container">
-                  <h2 className="title is-3 has-text-centered">So funktioniert unsere B2B Lead Generierung</h2>
+                  <h2 className="title is-3 has-text-centered mb-6 text-gray-800">So funktioniert unsere B2B Lead Generierung</h2>
                   <div className="columns is-variable is-6">
                     <div className="column is-4">
                       <div className="step-box">
