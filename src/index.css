@@ -989,12 +989,17 @@
   margin: 0 auto;
   padding: 2rem;
   text-align: center;
+  background-color: white;
+  border-radius: 16px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  border-top: 4px solid var(--primary-color);
 }
 
 .verification-icon {
   width: 80px;
   height: 80px;
   margin: 0 auto 2rem;
+  color: var(--primary-color);
 }
 
 .verification-title {
