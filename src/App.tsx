@@ -22,47 +22,27 @@ function App() {
     setError('');
 
     try {
-      // First check if email exists
-      const { data: existingEmail } = await supabase
-        .from('emails')
-        .select('email, verified')
-        .eq('email', email)
-        .single();
+      // Always insert a new record
+      const now = new Date();
+      const { error: insertError } = await supabase
+        .from('sophiena')
+        .insert([{ 
+          email: email,
+          industry: industry,
+          location: location,
+          verified: false,
+          created_at: now.toISOString()
+        }]);
 
-      if (existingEmail) {
-        // If email exists but not verified, allow resending verification
-        if (!existingEmail.verified) {
-          // Update the industry and location
-          const { error: updateError } = await supabase
-            .from('emails')
-            .update({ industry, location })
-            .eq('email', email);
+      if (insertError) throw insertError;
 
-          if (updateError) throw updateError;
-        } else {
-          setError('Diese E-Mail-Adresse wurde bereits verifiziert.');
-          setIsSubmitting(false);
-          return;
-        }
-      } else {
-        // New email, insert it
-        const { error: insertError } = await supabase
-          .from('emails')
-          .insert([{ 
-            email: email,
-            industry: industry,
-            location: location
-          }]);
-
-        if (insertError) throw insertError;
-      }
-
-      // Create verification token
+      // Create verification token with correct timestamp
       const token = btoa(JSON.stringify({
         email,
         industry,
         location,
-        timestamp: Date.now()
+        timestamp: Date.now(),
+        created: now.toISOString()
       }));
 
       // Send verification request to n8n
@@ -88,11 +68,7 @@ function App() {
       setVerificationSent(true);
     } catch (error) {
       console.error('Detailed error:', error);
-      if (error.code === '23505') { // Postgres unique violation code
-        setError('Diese E-Mail-Adresse wurde bereits registriert.');
-      } else {
-        setError('Ein Fehler ist aufgetreten. Bitte versuchen Sie es später erneut.');
-      }
+      setError('Ein Fehler ist aufgetreten. Bitte versuchen Sie es später erneut.');
     } finally {
       setIsSubmitting(false);
     }
@@ -107,7 +83,7 @@ function App() {
 
       // Update email verification status in Supabase
       const { error } = await supabase
-        .from('emails')
+        .from('sophiena')
         .update({ verified: true })
         .eq('email', email);
 
@@ -253,214 +229,141 @@ function App() {
         </div>
       </nav>
 
-      <Routes>
-        <Route path="/" element={
-          <>
-            <section className="hero is-fullheight-with-navbar">
-              <div className="hero-body">
-                <div className="container">
-                  <div className="columns is-vcentered">
-                    <div className="column is-6">
-                      <h1 className="title is-1 mb-6">
-                        Leads generieren leicht gemacht
-                      </h1>
-                      <p className="subtitle is-4 mb-6">
-                        Finde qualifizierte B2B-Kontakte in deiner Region
-                      </p>
-                      <div className="tags mb-6">
-                        <span className="tag is-medium">Zielgerichtete Suche</span>
-                        <span className="tag is-medium">Regionale Kontakte</span>
-                        <span className="tag is-medium">Sofort nutzbar</span>
-                      </div>
-                      <div className="buttons">
-                        <a href="#generator" className="button is-warning is-medium">
-                          <span>Jetzt Leads generieren</span>
-                          <span className="icon">
-                            <ChevronRight />
-                          </span>
-                        </a>
-                      </div>
-                    </div>
-                    <div className="column is-5 is-offset-1">
-                      <div className="box form-container" id="generator">
-                        <div className="form-header has-text-centered">
-                          <h2 className="title is-2 mb-2">Lead-Generator</h2>
-                          <p className="subtitle is-5">
-                            Starte jetzt mit der Lead-Generierung
-                          </p>
+      <main className="container mx-auto px-4 py-8">
+        <Routes>
+          <Route path="/" element={
+            <>
+              <section className="hero is-fullheight-with-navbar">
+                <div className="hero-body">
+                  <div className="container">
+                    <div className="columns is-vcentered">
+                      <div className="column is-6">
+                        <h1 className="text-4xl font-bold mb-6">
+                          Professionelle B2B Lead Generierung
+                        </h1>
+                        <h2 className="text-2xl mb-8 text-gray-600">
+                          Gewinnen Sie qualifizierte Business Kontakte in Ihrer Region
+                        </h2>
+                        <div className="buttons">
+                          <a href="#generator" className="button is-warning is-medium">
+                            <span>Jetzt Leads generieren</span>
+                            <span className="icon">
+                              <ChevronRight />
+                            </span>
+                          </a>
                         </div>
-                        {verificationSent ? renderVerificationSent() : renderForm()}
+                      </div>
+                      <div className="column is-5 is-offset-1">
+                        <div className="box form-container" id="generator">
+                          <div className="form-header has-text-centered">
+                            <h2 className="title is-2 mb-2">Lead-Generator</h2>
+                            <p className="subtitle is-5">
+                              Starte jetzt mit der Lead-Generierung
+                            </p>
+                          </div>
+                          {verificationSent ? renderVerificationSent() : renderForm()}
+                        </div>
                       </div>
                     </div>
                   </div>
                 </div>
-              </div>
-            </section>
+              </section>
 
-            <section className="section features-section has-background-white">
-              <div className="container">
-                <div className="columns is-multiline">
-                  <div className="column is-4">
-                    <div className="feature-box">
-                      <Target className="feature-icon" />
-                      <h3>Zielgerichtete Suche</h3>
-                      <p>Finde genau die Leads, die zu deinem Geschäft passen. Branchenspezifisch und relevant.</p>
+              <section className="section features-section has-background-white">
+                <div className="container">
+                  <h2 className="title is-3 has-text-centered mb-6">Ihre Vorteile der B2B Lead Generierung</h2>
+                  <div className="columns is-multiline">
+                    <div className="column is-4">
+                      <div className="feature-box">
+                        <Target className="feature-icon" />
+                        <h3>Zielgerichtete Leads</h3>
+                        <p>Finden Sie genau die Geschäftskontakte, die für Ihr B2B-Geschäft relevant sind. Qualifizierte Leads aus Ihrer Branche und Region.</p>
+                      </div>
                     </div>
-                  </div>
-                  <div className="column is-4">
-                    <div className="feature-box">
-                      <MapPin className="feature-icon" />
-                      <h3>Regionale Kontakte</h3>
-                      <p>Entdecke Geschäftsmöglichkeiten in deiner Region. Lokal und persönlich.</p>
+                    <div className="column is-4">
+                      <div className="feature-box">
+                        <Zap className="feature-icon" />
+                        <h3>Effiziente Generierung</h3>
+                        <p>Automatisierte Lead-Generierung spart Zeit und maximiert Ihre Vertriebserfolge. Konzentrieren Sie sich auf die Kontaktaufnahme.</p>
+                      </div>
                     </div>
-                  </div>
-                  <div className="column is-4">
-                    <div className="feature-box">
-                      <Zap className="feature-icon" />
-                      <h3>Sofort nutzbar</h3>
-                      <p>Erhalte deine Leads innerhalb weniger Minuten. Schnell und unkompliziert.</p>
+                    <div className="column is-4">
+                      <div className="feature-box">
+                        <BarChart className="feature-icon" />
+                        <h3>Messbare Ergebnisse</h3>
+                        <p>Verfolgen Sie Ihre Lead-Generierung mit detaillierten Analysen. Optimieren Sie Ihre B2B-Vertriebsstrategie basierend auf Daten.</p>
+                      </div>
                     </div>
                   </div>
                 </div>
-              </div>
-            </section>
+              </section>
 
-            <section className="section steps-section">
-              <div className="container">
-                <h2 className="steps-title title is-3">So findest du deine Leads</h2>
-                <div className="columns is-variable is-6">
-                  <div className="column is-4">
-                    <div className="step-box">
-                      <div className="step-number">1</div>
-                      <h3>Branche wählen</h3>
-                      <p>Wähle die Branche oder den Service aus, für den du Leads generieren möchtest.</p>
+              <section className="section steps-section">
+                <div className="container">
+                  <h2 className="title is-3 has-text-centered">So funktioniert unsere B2B Lead Generierung</h2>
+                  <div className="columns is-variable is-6">
+                    <div className="column is-4">
+                      <div className="step-box">
+                        <div className="step-number">1</div>
+                        <h3>Branche wählen</h3>
+                        <p>Wählen Sie die Branche oder den Service aus, für den Sie Leads generieren möchten.</p>
+                      </div>
                     </div>
-                  </div>
-                  <div className="column is-4">
-                    <div className="step-box">
-                      <div className="step-number">2</div>
-                      <h3>Region festlegen</h3>
-                      <p>Gib die Region oder Stadt an, in der du nach Leads suchen möchtest.</p>
+                    <div className="column is-4">
+                      <div className="step-box">
+                        <div className="step-number">2</div>
+                        <h3>Region festlegen</h3>
+                        <p>Geben Sie die Region oder Stadt an, in der Sie nach Leads suchen möchten.</p>
+                      </div>
                     </div>
-                  </div>
-                  <div className="column is-4">
-                    <div className="step-box">
-                      <div className="step-number">3</div>
-                      <h3>Leads erhalten</h3>
-                      <p>Erhalte sofort eine Liste mit relevanten Geschäftskontakten per E-Mail.</p>
+                    <div className="column is-4">
+                      <div className="step-box">
+                        <div className="step-number">3</div>
+                        <h3>Leads erhalten</h3>
+                        <p>Erhalten Sie sofort eine Liste mit relevanten Geschäftskontakten per E-Mail.</p>
+                      </div>
                     </div>
                   </div>
                 </div>
-              </div>
-            </section>
+              </section>
 
-            <section className="section faq-section has-background-white" id="faq">
-              <div className="container">
-                <h2 className="title is-3 has-text-centered mb-6">Häufig gestellte Fragen</h2>
-                <div className="columns is-multiline">
-                  <div className="column is-6">
-                    <div className="faq-box">
-                      <h3 className="faq-question">Was bedeutet Leads generieren?</h3>
-                      <p>Leads generieren bedeutet, potenzielle Kunden für dein Unternehmen zu finden und deren Kontaktdaten zu sammeln.</p>
-                    </div>
-                  </div>
-                  <div className="column is-6">
-                    <div className="faq-box">
-                      <h3 className="faq-question">Wie funktioniert der Lead-Generator?</h3>
-                      <p>Du gibst deine Branche und Region ein, und wir suchen passende B2B-Kontakte für dich. Die Leads erhältst du per E-Mail.</p>
-                    </div>
-                  </div>
-                  <div className="column is-6">
-                    <div className="faq-box">
-                      <h3 className="faq-question">Welche Informationen erhalte ich?</h3>
-                      <p>Du erhältst relevante Geschäftskontakte mit Namen, E-Mail, Telefonnummer und Adresse aus deiner Zielregion.</p>
-                    </div>
-                  </div>
-                  <div className="column is-6">
-                    <div className="faq-box">
-                      <h3 className="faq-question">Wie aktuell sind die Leads?</h3>
-                      <p>Unsere Datenbank wird regelmäßig aktualisiert, um dir stets aktuelle und qualifizierte Leads zu liefern.</p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </section>
-
-            <section className="section cta-section">
-              <div className="container has-text-centered">
-                <h2 className="title is-3 mb-6">Bereit, neue Kunden zu gewinnen?</h2>
-                <a href="#generator" className="button is-white is-medium">Jetzt Leads generieren</a>
-              </div>
-            </section>
-
-            <footer className="footer">
-              <div className="content has-text-centered">
-                <p>
-                  Entwickelt von <a href="https://www.theaiwhisperer.de" target="_blank" rel="noopener noreferrer">The AIWhisperer</a>
-                </p>
-                <div className="footer-links">
-                  <p className="is-size-7 mt-3">
-                    <Link to="/impressum" className="has-text-grey">Impressum</Link>
-                    {" | "}
-                    <Link to="/datenschutz" className="has-text-grey">Datenschutz</Link>
+              <footer className="footer">
+                <div className="content has-text-centered">
+                  <p>
+                    Entwickelt von <a href="https://www.theaiwhisperer.de" target="_blank" rel="noopener noreferrer">The AIWhisperer</a>
                   </p>
-                </div>
-              </div>
-            </footer>
-          </>
-        } />
-
-        <Route path="/verify/success" element={
-          <div className="min-h-screen bg-gray-100 flex items-center justify-center">
-            <div className="w-full max-w-md mx-4">
-              <div className="bg-white rounded-lg shadow-xl p-8">
-                <div className="text-center">
-                  <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                    <CheckCircle className="w-8 h-8 text-green-500" />
+                  <div className="footer-links">
+                    <p className="is-size-7 mt-3">
+                      <Link to="/impressum" className="has-text-grey">Impressum</Link>
+                      {" | "}
+                      <Link to="/datenschutz" className="has-text-grey">Datenschutz</Link>
+                    </p>
                   </div>
-                  <h2 className="text-2xl font-bold text-gray-800 mb-4">
-                    E-Mail erfolgreich verifiziert!
-                  </h2>
-                  <p className="text-gray-600 mb-6">
-                    Ihre E-Mail-Adresse wurde erfolgreich verifiziert. Sie erhalten in Kürze Ihre Leads.
-                  </p>
-                  <Link to="/" className="button is-blue">
-                    Zurück zur Startseite
-                  </Link>
                 </div>
+              </footer>
+            </>
+          } />
+
+          <Route path="/verify/success" element={
+            <div className="container">
+              <div className="notification is-success">
+                Email wurde erfolgreich verifiziert!
               </div>
             </div>
-          </div>
-        } />
+          } />
 
-        <Route path="/verify/error" element={
-          <div className="min-h-screen bg-gray-100 flex items-center justify-center">
-            <div className="w-full max-w-md mx-4">
-              <div className="bg-white rounded-lg shadow-xl p-8">
-                <div className="text-center">
-                  <div className="w-16 h-16 bg-red-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                    <svg className="w-8 h-8 text-red-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12"></path>
-                    </svg>
-                  </div>
-                  <h2 className="text-2xl font-bold text-red-600 mb-4">
-                    Verifizierung fehlgeschlagen
-                  </h2>
-                  <p className="text-gray-600 mb-6">
-                    Ein Fehler ist aufgetreten. Bitte versuchen Sie es später erneut.
-                  </p>
-                  <Link to="/" className="button is-blue">
-                    Zurück zur Startseite
-                  </Link>
-                </div>
+          <Route path="/verify/error" element={
+            <div className="container">
+              <div className="notification is-danger">
+                Fehler bei der Verifizierung der Email!
               </div>
             </div>
-          </div>
-        } />
+          } />
 
-        <Route path="/impressum" element={<Impressum />} />
-        <Route path="/datenschutz" element={<Datenschutz />} />
-      </Routes>
+          <Route path="/impressum" element={<Impressum />} />
+          <Route path="/datenschutz" element={<Datenschutz />} />
+        </Routes>
+      </main>
     </div>
   );
 }
