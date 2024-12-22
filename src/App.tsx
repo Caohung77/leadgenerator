@@ -22,8 +22,56 @@ function App() {
     setError('');
 
     try {
-      // Always insert a new record
+      // Check if email was used in the last 24 hours
+      const { data: usageData, error: usageError } = await supabase
+        .from('email_usage')
+        .select('last_used')
+        .eq('email', email)
+        .single();
+
+      if (usageError && usageError.code !== 'PGRST116') {
+        console.error('Database error:', usageError);
+        throw new Error('Ein Fehler ist aufgetreten. Bitte versuche es später erneut.');
+      }
+
       const now = new Date();
+
+      if (usageData) {
+        const lastUsed = new Date(usageData.last_used);
+        const hoursSinceLastUse = (now.getTime() - lastUsed.getTime()) / (1000 * 60 * 60);
+
+        console.log('Hours since last use:', hoursSinceLastUse);
+
+        if (hoursSinceLastUse < 24) {
+          const hoursRemaining = Math.ceil(24 - hoursSinceLastUse);
+          setError(`Diese E-Mail wurde bereits verwendet. Bitte versuche es in ${hoursRemaining} Stunden erneut.`);
+          setIsSubmitting(false);
+          return;
+        }
+
+        // Update last_used timestamp if more than 24 hours have passed
+        const { error: updateError } = await supabase
+          .from('email_usage')
+          .update({ last_used: now.toISOString() })
+          .eq('email', email);
+
+        if (updateError) {
+          console.error('Update error:', updateError);
+          throw new Error('Ein Fehler ist aufgetreten. Bitte versuche es später erneut.');
+        }
+      } else {
+        // Insert new email usage record
+        const { error: insertUsageError } = await supabase
+          .from('email_usage')
+          .insert([{ email, last_used: now.toISOString() }]);
+
+        if (insertUsageError) {
+          console.error('Insert usage error:', insertUsageError);
+          throw new Error('Ein Fehler ist aufgetreten. Bitte versuche es später erneut.');
+        }
+      }
+
+      // Only proceed with sophiena insert if email check passes
       const { error: insertError } = await supabase
         .from('sophiena')
         .insert([{ 
@@ -34,7 +82,10 @@ function App() {
           created_at: now.toISOString()
         }]);
 
-      if (insertError) throw insertError;
+      if (insertError) {
+        console.error('Insert error:', insertError);
+        throw new Error('Ein Fehler ist aufgetreten. Bitte versuche es später erneut.');
+      }
 
       // Create verification token with correct timestamp
       const token = btoa(JSON.stringify({
@@ -68,7 +119,7 @@ function App() {
       setVerificationSent(true);
     } catch (error) {
       console.error('Detailed error:', error);
-      setError('Ein Fehler ist aufgetreten. Bitte versuchen Sie es später erneut.');
+      setError(error instanceof Error ? error.message : 'Ein Fehler ist aufgetreten. Bitte versuche es später erneut.');
     } finally {
       setIsSubmitting(false);
     }
