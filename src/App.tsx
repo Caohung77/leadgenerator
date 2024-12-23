@@ -425,6 +425,52 @@ function App() {
                 </div>
               </section>
 
+              <section className="section py-4">
+                <div className="container">
+                  <div className="columns is-centered">
+                    <div className="column is-10">
+                      <div className="box p-5 has-background-white">
+                        <div className="columns is-vcentered">
+                          <div className="column is-3 has-text-centered">
+                            <figure className="image is-128x128 mx-auto">
+                              <img 
+                                src="/chn-profile.gif" 
+                                alt="Cao Hung Nguyen" 
+                                className="is-rounded"
+                                style={{ border: '3px solid #3298dc' }}
+                              />
+                            </figure>
+                            <h3 className="title is-4 mt-3">Cao Hung Nguyen</h3>
+                          </div>
+                          <div className="column is-9">
+                            <div className="content has-text-left">
+                              <p className="is-size-5 mb-4">
+                                Wenn dir Sophiena gefällt, würde ich mich über jede Weiterempfehlung freuen. Gerne verbinde dich mit mir auf LinkedIn.
+                              </p>
+                              <div>
+                                <a
+                                  href="https://www.linkedin.com/in/caohungnguyen/"
+                                  target="_blank"
+                                  rel="noopener noreferrer"
+                                  className="button is-info is-medium is-rounded"
+                                >
+                                  <span className="icon">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                                      <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>
+                                    </svg>
+                                  </span>
+                                  <span>Mit mir auf LinkedIn verbinden</span>
+                                </a>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </section>
+
               <footer className="footer">
                 <div className="content has-text-centered">
                   <p>
