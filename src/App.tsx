@@ -3,6 +3,7 @@ import { Routes, Route, Link, useParams, useNavigate } from 'react-router-dom';
 import { Building2, MapPin, Mail, ChevronRight, Target, Zap, BarChart, CheckCircle, Coins } from 'lucide-react';
 import Impressum from './components/Impressum';
 import Datenschutz from './components/Datenschutz';
+import Typewriter from './components/Typewriter';
 import { supabase } from './supabaseClient';
 
 function App() {
@@ -342,9 +343,13 @@ function App() {
               <section className="hero is-primary">
                 <div className="hero-content">
                   <div className="hero-text">
-                    <h1 className="title text-4xl md:text-5xl lg:text-6xl text-white mb-6">
-                      B2B Leads per CSV - Schnell & Einfach
-                    </h1>
+                    <Typewriter
+                      text="B2B Leads per CSV - Schnell & Einfach"
+                      speed={50}
+                      className="title text-4xl md:text-5xl lg:text-6xl text-white mb-6"
+                      loop={false}
+                      showCursor={false}
+                    />
                     <h2 className="subtitle text-xl md:text-2xl text-white/90 mb-8">
                       Täglich bis zu 3 CSV-Dateien mit qualifizierten Geschäftskontakten in deiner Region.
                     </h2>
