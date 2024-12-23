@@ -441,22 +441,22 @@ function App() {
                       </thead>
                       <tbody>
                         <tr>
-                          <td style={{ color: '#000000' }}>TechSolutions GmbH</td>
-                          <td style={{ color: '#000000' }}>techsolutions-gmbh.de</td>
-                          <td style={{ color: '#000000' }}>kontakt@techsolutions-gmbh.de</td>
-                          <td style={{ color: '#000000' }}>IT-Dienstleister für KMU, spezialisiert auf Cloud-Lösungen und Digitalisierung</td>
+                          <td style={{ color: '#333333' }}>TechSolutions GmbH</td>
+                          <td style={{ color: '#333333' }}>techsolutions-gmbh.de</td>
+                          <td style={{ color: '#333333' }}>kontakt@techsolutions-gmbh.de</td>
+                          <td style={{ color: '#333333' }}>IT-Dienstleister für KMU, spezialisiert auf Cloud-Lösungen und Digitalisierung</td>
                         </tr>
                         <tr>
-                          <td style={{ color: '#000000' }}>Marketing Plus AG</td>
-                          <td style={{ color: '#000000' }}>marketingplus.de</td>
-                          <td style={{ color: '#000000' }}>info@marketingplus.de</td>
-                          <td style={{ color: '#000000' }}>Full-Service Marketingagentur mit Fokus auf B2B-Marketing und Lead-Generierung</td>
+                          <td style={{ color: '#333333' }}>Marketing Plus AG</td>
+                          <td style={{ color: '#333333' }}>marketingplus.de</td>
+                          <td style={{ color: '#333333' }}>info@marketingplus.de</td>
+                          <td style={{ color: '#333333' }}>Full-Service Marketingagentur mit Fokus auf B2B-Marketing und Lead-Generierung</td>
                         </tr>
                         <tr>
-                          <td style={{ color: '#000000' }}>Innovate Consulting</td>
-                          <td style={{ color: '#000000' }}>innovate-consulting.de</td>
-                          <td style={{ color: '#000000' }}>kontakt@innovate-consulting.de</td>
-                          <td style={{ color: '#000000' }}>Unternehmensberatung für digitale Transformation und Prozessoptimierung</td>
+                          <td style={{ color: '#333333' }}>Innovate Consulting</td>
+                          <td style={{ color: '#333333' }}>innovate-consulting.de</td>
+                          <td style={{ color: '#333333' }}>kontakt@innovate-consulting.de</td>
+                          <td style={{ color: '#333333' }}>Unternehmensberatung für digitale Transformation und Prozessoptimierung</td>
                         </tr>
                       </tbody>
                     </table>
@@ -485,8 +485,8 @@ function App() {
                             <h3 className="title is-4 mt-3 text-gray-800">Cao Hung Nguyen</h3>
                           </div>
                           <div className="column is-9-desktop is-12-mobile">
-                            <div className="content has-text-left">
-                              <p className="is-size-5 mb-4">
+                            <div className="content has-text-left linkedin-section">
+                              <p className="is-size-5 mb-4" style={{ color: '#333333' }}>
                                 Wenn dir Sophiena gefällt, würde ich mich über jede Weiterempfehlung freuen. Gerne verbinde dich mit mir auf LinkedIn.
                               </p>
                               <div className="buttons">
@@ -501,7 +501,7 @@ function App() {
                                       <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>
                                     </svg>
                                   </span>
-                                  <span>Mit mir auf LinkedIn verbinden</span>
+                                  <span>Auf LinkedIn verbinden</span>
                                 </a>
                               </div>
                             </div>
