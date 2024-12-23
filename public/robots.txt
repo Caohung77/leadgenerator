@@ -1,0 +1,11 @@
+# https://www.robotstxt.org/robotstxt.html
+User-agent: *
+Allow: /
+
+# Sitemaps
+Sitemap: https://sophiena.de/sitemap.xml
+
+# Disallow admin and api routes if they exist in the future
+Disallow: /admin/
+Disallow: /api/
+Disallow: /verify/
