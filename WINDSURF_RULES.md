@@ -27,11 +27,27 @@ public/
 - React 18
 - TypeScript
 - Vite
+- Bulma CSS (via CDN)
 - Tailwind CSS
 - Supabase
 - React Router DOM
 - Lucide React
 - React Hot Toast
+
+## CSS Framework Usage
+- Use Bulma for:
+  - Pre-built components (navbar, tags, buttons)
+  - Base styling and structure
+  - Form components
+  - Hero sections
+  - Modifiers (is-primary, is-medium, etc.)
+
+- Use Tailwind for:
+  - Layout (flex, grid)
+  - Spacing and positioning
+  - Responsive design (md:, lg: breakpoints)
+  - Custom styling and fine-tuning
+  - Component-specific adjustments
 
 ## Naming Conventions
 - Use lowercase with dashes for directories (e.g., components/form-input)
@@ -67,7 +83,8 @@ public/
 - Use descriptive variable and function names
 
 ## UI and Styling
-- Use Tailwind CSS for styling
+- Use Bulma for component structure
+- Use Tailwind for layout and customization
 - Follow responsive design principles
 - Implement proper loading states
 - Use Lucide icons consistently
@@ -99,36 +116,29 @@ public/
 Commit Message Prefixes:
 - "fix:" for bug fixes
 - "feat:" for new features
-- "style:" for UI/styling changes
-- "docs:" for documentation
+- "style:" for styling changes
 - "refactor:" for code improvements
-- "perf:" for performance updates
-- "security:" for security enhancements
+- "docs:" for documentation updates
+- "test:" for adding tests
+- "chore:" for maintenance tasks
 
-Rules:
-- Use descriptive commit messages
-- Reference related issues
-- Keep commits focused and atomic
-- Document breaking changes
+## Performance
+- Optimize image sizes
+- Minimize unnecessary re-renders
+- Use proper lazy loading
+- Implement caching where appropriate
+- Monitor bundle size
 
-## Documentation
-- Maintain clear README
-- Document environment setup
-- Keep SQL files well-commented
-- Document API interactions
-- Maintain clear component documentation
+## Accessibility
+- Use semantic HTML elements
+- Provide proper ARIA labels
+- Ensure keyboard navigation
+- Maintain sufficient color contrast
+- Support screen readers
 
-## Development Workflow
-- Use proper version control
-- Test locally before deployment
-- Follow deployment checklist
-- Update documentation
-- Monitor error rates
-- Track performance metrics
-
-## Environment Management
-- Use .env files properly
-- Never commit sensitive data
-- Document required variables
-- Maintain separate production/development configs
-- Handle environment-specific features
+## Localization
+- Use German for all user-facing text
+- Support proper date/time formatting
+- Follow German address formats
+- Use appropriate number formatting
+- Support German phone number formats

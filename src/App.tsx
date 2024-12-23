@@ -15,6 +15,7 @@ function App() {
   const [verificationStatus, setVerificationStatus] = useState('');
   const [verificationSuccess, setVerificationSuccess] = useState(false);
   const [verificationError, setVerificationError] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -276,13 +277,36 @@ function App() {
     </div>
   );
 
+  useEffect(() => {
+    // Remove the preload navbar when React app is mounted
+    const preloadNavbar = document.getElementById('preload-navbar');
+    if (preloadNavbar) {
+      preloadNavbar.classList.add('hidden');
+    }
+    // Show the React app
+    const root = document.getElementById('root');
+    if (root) {
+      root.classList.add('ready');
+    }
+    // Set loading to false after initial render
+    setIsLoading(false);
+  }, []);
+
+  if (isLoading) {
+    return null; // Return nothing while loading
+  }
+
   return (
     <div className="app">
       <nav className="navbar">
         <div className="container mx-auto px-4">
           <div className="navbar-brand">
             <Link to="/" className="flex items-center">
-              <img src="/sophia.png" alt="Sophiena" className="h-12" />
+              <img 
+                src="/sophia.png" 
+                alt="Sophiena" 
+                style={{ maxWidth: '50%', height: 'auto' }} 
+              />
             </Link>
           </div>
         </div>
@@ -301,14 +325,14 @@ function App() {
                     <h2 className="subtitle text-xl md:text-2xl text-white/90 mb-8">
                       Finde qualifizierte B2B-Kontakte in deiner Region.
                     </h2>
-                    <div className="flex flex-wrap gap-3 mb-8">
-                      <span className="bg-white/20 text-white px-4 py-2 rounded-full flex items-center gap-2">
+                    <div className="flex flex-wrap gap-6 mb-8">
+                      <span className="tag is-medium is-light is-primary flex items-center gap-2 mr-4">
                         <Target size={20} /> Zielgerichtete Suche
                       </span>
-                      <span className="bg-white/20 text-white px-4 py-2 rounded-full flex items-center gap-2">
+                      <span className="tag is-medium is-light is-primary flex items-center gap-2 mr-4">
                         <MapPin size={20} /> Regionale Kontakte
                       </span>
-                      <span className="bg-white/20 text-white px-4 py-2 rounded-full flex items-center gap-2">
+                      <span className="tag is-medium is-light is-primary flex items-center gap-2">
                         <Coins size={20} /> Kostenlos
                       </span>
                     </div>
