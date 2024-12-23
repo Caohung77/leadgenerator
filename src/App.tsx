@@ -430,7 +430,7 @@ function App() {
                 <div className="container">
                   <h2 className="title is-3 has-text-centered mb-6 text-gray-800">Beispiel einer Lead-Liste</h2>
                   <div className="table-container">
-                    <table className="table is-fullwidth is-hoverable">
+                    <table className="table is-fullwidth is-hoverable" style={{ backgroundColor: 'white' }}>
                       <thead>
                         <tr>
                           <th style={{ backgroundColor: '#e67e22' }} className="has-text-white">Unternehmen</th>
@@ -441,22 +441,22 @@ function App() {
                       </thead>
                       <tbody>
                         <tr>
-                          <td>TechSolutions GmbH</td>
-                          <td>techsolutions-gmbh.de</td>
-                          <td>kontakt@techsolutions-gmbh.de</td>
-                          <td>IT-Dienstleister für KMU, spezialisiert auf Cloud-Lösungen und Digitalisierung</td>
+                          <td style={{ color: '#000000' }}>TechSolutions GmbH</td>
+                          <td style={{ color: '#000000' }}>techsolutions-gmbh.de</td>
+                          <td style={{ color: '#000000' }}>kontakt@techsolutions-gmbh.de</td>
+                          <td style={{ color: '#000000' }}>IT-Dienstleister für KMU, spezialisiert auf Cloud-Lösungen und Digitalisierung</td>
                         </tr>
                         <tr>
-                          <td>Marketing Plus AG</td>
-                          <td>marketingplus.de</td>
-                          <td>info@marketingplus.de</td>
-                          <td>Full-Service Marketingagentur mit Fokus auf B2B-Marketing und Lead-Generierung</td>
+                          <td style={{ color: '#000000' }}>Marketing Plus AG</td>
+                          <td style={{ color: '#000000' }}>marketingplus.de</td>
+                          <td style={{ color: '#000000' }}>info@marketingplus.de</td>
+                          <td style={{ color: '#000000' }}>Full-Service Marketingagentur mit Fokus auf B2B-Marketing und Lead-Generierung</td>
                         </tr>
                         <tr>
-                          <td>Innovate Consulting</td>
-                          <td>innovate-consulting.de</td>
-                          <td>kontakt@innovate-consulting.de</td>
-                          <td>Unternehmensberatung für digitale Transformation und Prozessoptimierung</td>
+                          <td style={{ color: '#000000' }}>Innovate Consulting</td>
+                          <td style={{ color: '#000000' }}>innovate-consulting.de</td>
+                          <td style={{ color: '#000000' }}>kontakt@innovate-consulting.de</td>
+                          <td style={{ color: '#000000' }}>Unternehmensberatung für digitale Transformation und Prozessoptimierung</td>
                         </tr>
                       </tbody>
                     </table>
@@ -482,7 +482,7 @@ function App() {
                                 style={{ border: '3px solid #3298dc' }}
                               />
                             </figure>
-                            <h3 className="title is-4 mt-3">Cao Hung Nguyen</h3>
+                            <h3 className="title is-4 mt-3 text-gray-800">Cao Hung Nguyen</h3>
                           </div>
                           <div className="column is-9-desktop is-12-mobile">
                             <div className="content has-text-left">
