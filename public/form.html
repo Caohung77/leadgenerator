@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lead Generation Form</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@1.0.2/css/bulma.min.css">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        .hero.is-primary {
+            background: linear-gradient(135deg, #485fc7 0%, #3e8ed0 100%);
+        }
+        .icon-wrapper {
+            position: relative;
+        }
+        .icon-wrapper .icon {
+            position: absolute;
+            left: 0.5rem;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #7a7a7a;
+        }
+        .icon-wrapper input {
+            padding-left: 2.5rem !important;
+        }
+        .success-icon {
+            width: 64px;
+            height: 64px;
+            color: #48c78e;
+        }
+    </style>
+</head>
+<body>
+    <section class="hero is-primary is-fullheight">
+        <div class="hero-body">
+            <div class="container">
+                <div class="columns is-centered">
+                    <div class="column is-5-tablet is-4-desktop">
+                        <div class="box p-6" id="formCard">
+                            <h1 class="title is-3 mb-2">Lead Generation</h1>
+                            <p class="subtitle is-6 mb-5">Füllen Sie das Formular aus, um Ihre maßgeschneiderte Unternehmensliste zu erhalten.</p>
+                            
+                            <form id="leadForm">
+                                <div class="field">
+                                    <label class="label">Industrie</label>
+                                    <div class="control icon-wrapper">
+                                        <i data-lucide="building-2" class="icon is-small"></i>
+                                        <input
+                                            type="text"
+                                            id="industry"
+                                            class="input"
+                                            required
+                                            placeholder="Geben Sie die Branche ein"
+                                        >
+                                    </div>
+                                </div>
+
+                                <div class="field">
+                                    <label class="label">Ort</label>
+                                    <div class="control icon-wrapper">
+                                        <i data-lucide="map-pin" class="icon is-small"></i>
+                                        <input
+                                            type="text"
+                                            id="location"
+                                            class="input"
+                                            required
+                                            placeholder="Geben Sie den Ort ein"
+                                        >
+                                    </div>
+                                </div>
+
+                                <div class="field">
+                                    <label class="label">Ihre E-Mail</label>
+                                    <div class="control icon-wrapper">
+                                        <i data-lucide="mail" class="icon is-small"></i>
+                                        <input
+                                            type="email"
+                                            id="email"
+                                            class="input"
+                                            required
+                                            placeholder="Geben Sie Ihre E-Mail-Adresse ein"
+                                        >
+                                    </div>
+                                </div>
+
+                                <div class="field mt-5">
+                                    <div class="control">
+                                        <button
+                                            type="submit"
+                                            id="submitButton"
+                                            class="button is-primary is-fullwidth"
+                                        >
+                                            <span>Unternehmensliste anfordern</span>
+                                            <span class="icon">
+                                                <i data-lucide="arrow-right"></i>
+                                            </span>
+                                        </button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+
+                        <div class="box p-6 has-text-centered is-hidden" id="successCard">
+                            <div class="mb-4">
+                                <i data-lucide="mail" class="success-icon"></i>
+                            </div>
+                            <h2 class="title is-4 mb-4">Vielen Dank!</h2>
+                            <p class="subtitle is-6">
+                                Ihre Anfrage wurde erfolgreich übermittelt. Sie erhalten die CSV-Datei in Kürze an Ihre E-Mail-Adresse.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        // Initialize Lucide icons
+        lucide.createIcons();
+
+        // Form submission handler
+        document.getElementById('leadForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            const submitButton = document.getElementById('submitButton');
+            const formData = {
+                industry: document.getElementById('industry').value,
+                location: document.getElementById('location').value,
+                email: document.getElementById('email').value
+            };
+
+            // Disable button and show loading state
+            submitButton.disabled = true;
+            submitButton.classList.add('is-loading');
+
+            try {
+                const response = await fetch('https://n8n.theaiwhisperer.cloud/webhook-test/3dc76ff6-48b4-4b2d-afa3-dc108aa2b718', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(formData),
+                });
+
+                if (response.ok) {
+                    document.getElementById('formCard').classList.add('is-hidden');
+                    document.getElementById('successCard').classList.remove('is-hidden');
+                } else {
+                    throw new Error('Network response was not ok');
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                alert('Ein Fehler ist aufgetreten. Bitte versuchen Sie es später erneut.');
+                submitButton.disabled = false;
+                submitButton.classList.remove('is-loading');
+            }
+        });
+    </script>
+</body>
+</html>

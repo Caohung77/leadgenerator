@@ -1,0 +1,10 @@
+@charset "utf-8";
+
+// Override Bulma's variables
+$navbar-item-img-max-height: 15px;
+$navbar-height: 2.5rem;
+$navbar-padding-vertical: 0.25rem;
+$navbar-padding-horizontal: 0.75rem;
+
+// Import Bulma
+@import "node_modules/bulma/bulma.sass";

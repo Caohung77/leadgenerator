@@ -1,0 +1,22 @@
+/* Custom styles to override Bulma defaults */
+.navbar .navbar-brand .navbar-item img,
+.navbar-item img,
+.navbar .navbar-item img {
+    max-height: 10px !important;
+    height: 10px !important;
+}
+
+.navbar {
+    min-height: 2rem !important;
+}
+
+.navbar-item {
+    padding: 0.25rem 0.75rem !important;
+}
+
+/* Additional specificity for image override */
+.navbar-brand a.navbar-item img {
+    max-height: 10px !important;
+    height: 10px !important;
+    width: auto !important;
+}
