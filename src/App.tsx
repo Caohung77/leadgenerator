@@ -343,14 +343,14 @@ function App() {
                 <div className="hero-content">
                   <div className="hero-text">
                     <h1 className="title text-4xl md:text-5xl lg:text-6xl text-white mb-6">
-                      Leads generieren leicht gemacht
+                      B2B Leads per CSV - Schnell & Einfach
                     </h1>
                     <h2 className="subtitle text-xl md:text-2xl text-white/90 mb-8">
-                      Finde qualifizierte B2B-Kontakte in deiner Region.
+                      Täglich bis zu 3 CSV-Dateien mit qualifizierten Geschäftskontakten in deiner Region.
                     </h2>
                     <div className="flex flex-wrap gap-6 mb-8">
                       <span className="tag is-medium is-light is-primary flex items-center gap-2 mr-4">
-                        <Target size={20} /> Zielgerichtete Suche
+                        <Target size={20} /> CSV-Export
                       </span>
                       <span className="tag is-medium is-light is-primary flex items-center gap-2 mr-4">
                         <MapPin size={20} /> Regionale Kontakte
@@ -369,27 +369,27 @@ function App() {
 
               <section className="section features-section bg-white">
                 <div className="container">
-                  <h2 className="title is-3 has-text-centered mb-6 text-gray-800">Ihre Vorteile der B2B Lead Generierung</h2>
+                  <h2 className="title is-3 has-text-centered mb-6 text-gray-800">Deine Vorteile mit Sophiena Lead Generator</h2>
                   <div className="columns is-multiline">
                     <div className="column is-4">
                       <div className="feature-box">
                         <Target className="feature-icon" />
-                        <h3>Zielgerichtete Leads</h3>
-                        <p>Finden Sie genau die Geschäftskontakte, die für Ihr B2B-Geschäft relevant sind. Qualifizierte Leads aus Ihrer Branche und Region.</p>
+                        <h3>CSV-Export Ready</h3>
+                        <p>Erhalte deine B2B-Kontakte direkt als CSV-Datei. Perfekt für dein CRM-System und Marketing-Tools.</p>
                       </div>
                     </div>
                     <div className="column is-4">
                       <div className="feature-box">
                         <Zap className="feature-icon" />
-                        <h3>Effiziente Generierung</h3>
-                        <p>Automatisierte Lead-Generierung spart Zeit und maximiert Ihre Vertriebserfolge. Konzentrieren Sie sich auf die Kontaktaufnahme.</p>
+                        <h3>Schnelle Lieferung</h3>
+                        <p>Nach der E-Mail-Verifizierung erhältst du sofort deine CSV-Datei mit qualifizierten Geschäftskontakten.</p>
                       </div>
                     </div>
                     <div className="column is-4">
                       <div className="feature-box">
                         <BarChart className="feature-icon" />
-                        <h3>Messbare Ergebnisse</h3>
-                        <p>Verfolgen Sie Ihre Lead-Generierung mit detaillierten Analysen. Optimieren Sie Ihre B2B-Vertriebsstrategie basierend auf Daten.</p>
+                        <h3>Bis zu 3x täglich</h3>
+                        <p>Nutze den Service bis zu dreimal täglich für verschiedene Branchen oder Regionen. Komplett kostenlos.</p>
                       </div>
                     </div>
                   </div>
@@ -398,27 +398,27 @@ function App() {
 
               <section className="section steps-section">
                 <div className="container">
-                  <h2 className="title is-3 has-text-centered mb-6 text-gray-800">So funktioniert unsere B2B Lead Generierung</h2>
+                  <h2 className="title is-3 has-text-centered mb-6 text-gray-800">In 3 Schritten zu deinen B2B Leads</h2>
                   <div className="columns is-variable is-6">
                     <div className="column is-4">
                       <div className="step-box">
                         <div className="step-number">1</div>
-                        <h3>Branche wählen</h3>
-                        <p>Wählen Sie die Branche oder den Service aus, für den Sie Leads generieren möchten.</p>
+                        <h3>Branche eingeben</h3>
+                        <p>Wähle deine Zielbranche für maßgeschneiderte B2B-Kontakte in der CSV-Datei.</p>
                       </div>
                     </div>
                     <div className="column is-4">
                       <div className="step-box">
                         <div className="step-number">2</div>
-                        <h3>Region festlegen</h3>
-                        <p>Geben Sie die Region oder Stadt an, in der Sie nach Leads suchen möchten.</p>
+                        <h3>Region auswählen</h3>
+                        <p>Bestimme dein Zielgebiet für lokale Geschäftskontakte in Deutschland.</p>
                       </div>
                     </div>
                     <div className="column is-4">
                       <div className="step-box">
                         <div className="step-number">3</div>
-                        <h3>Leads erhalten</h3>
-                        <p>Erhalten Sie sofort eine Liste mit relevanten Geschäftskontakten per E-Mail.</p>
+                        <h3>CSV herunterladen</h3>
+                        <p>Erhalte deine CSV-Datei mit verifizierten B2B-Kontakten per E-Mail.</p>
                       </div>
                     </div>
                   </div>
