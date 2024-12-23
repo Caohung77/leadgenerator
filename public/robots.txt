@@ -1,11 +1,23 @@
-# https://www.robotstxt.org/robotstxt.html
+# Welcome to Sophiena Lead Generator
+# https://sophiena.de/
+
+# Allow Google bots
+User-agent: Googlebot
+Allow: /
+User-agent: Googlebot-Image
+Allow: /
+User-agent: Googlebot-Mobile
+Allow: /
+
+# Allow all other bots
 User-agent: *
 Allow: /
 
 # Sitemaps
 Sitemap: https://sophiena.de/sitemap.xml
 
-# Disallow admin and api routes if they exist in the future
-Disallow: /admin/
-Disallow: /api/
+# Crawl-delay
+Crawl-delay: 1
+
+# Private areas
 Disallow: /verify/
