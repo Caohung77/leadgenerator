@@ -26,7 +26,7 @@ function App() {
       // Check if email was used in the last 24 hours
       const { data: usageData, error: usageError } = await supabase
         .from('email_usage')
-        .select('last_used')
+        .select('last_used, usage_count')
         .eq('email', email)
         .single();
 
@@ -40,31 +40,54 @@ function App() {
       if (usageData) {
         const lastUsed = new Date(usageData.last_used);
         const hoursSinceLastUse = (now.getTime() - lastUsed.getTime()) / (1000 * 60 * 60);
+        const currentCount = usageData.usage_count || 0;
 
         console.log('Hours since last use:', hoursSinceLastUse);
+        console.log('Current usage count:', currentCount);
 
         if (hoursSinceLastUse < 24) {
-          const hoursRemaining = Math.ceil(24 - hoursSinceLastUse);
-          setError(`Diese E-Mail wurde bereits verwendet. Bitte versuche es in ${hoursRemaining} Stunden erneut.`);
-          setIsSubmitting(false);
-          return;
-        }
+          if (currentCount >= 3) {
+            const hoursRemaining = Math.ceil(24 - hoursSinceLastUse);
+            setError(`Du hast das Tageslimit erreicht. Bitte versuche es in ${hoursRemaining} Stunden erneut.`);
+            setIsSubmitting(false);
+            return;
+          }
+          // Update usage count if within same 24 hour period
+          const { error: updateError } = await supabase
+            .from('email_usage')
+            .update({ 
+              usage_count: currentCount + 1 
+            })
+            .eq('email', email);
 
-        // Update last_used timestamp if more than 24 hours have passed
-        const { error: updateError } = await supabase
-          .from('email_usage')
-          .update({ last_used: now.toISOString() })
-          .eq('email', email);
+          if (updateError) {
+            console.error('Update error:', updateError);
+            throw new Error('Ein Fehler ist aufgetreten. Bitte versuche es später erneut.');
+          }
+        } else {
+          // Reset count and update timestamp if more than 24 hours have passed
+          const { error: updateError } = await supabase
+            .from('email_usage')
+            .update({ 
+              last_used: now.toISOString(),
+              usage_count: 1
+            })
+            .eq('email', email);
 
-        if (updateError) {
-          console.error('Update error:', updateError);
-          throw new Error('Ein Fehler ist aufgetreten. Bitte versuche es später erneut.');
+          if (updateError) {
+            console.error('Update error:', updateError);
+            throw new Error('Ein Fehler ist aufgetreten. Bitte versuche es später erneut.');
+          }
         }
       } else {
         // Insert new email usage record
         const { error: insertUsageError } = await supabase
           .from('email_usage')
-          .insert([{ email, last_used: now.toISOString() }]);
+          .insert([{ 
+            email, 
+            last_used: now.toISOString(),
+            usage_count: 1
+          }]);
 
         if (insertUsageError) {
           console.error('Insert usage error:', insertUsageError);
