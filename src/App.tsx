@@ -425,13 +425,55 @@ function App() {
                 </div>
               </section>
 
+              {/* Sample Leads Table */}
+              <section className="section py-6">
+                <div className="container">
+                  <h2 className="title is-3 has-text-centered mb-6 text-gray-800">Beispiel einer Lead-Liste</h2>
+                  <div className="table-container">
+                    <table className="table is-fullwidth is-hoverable">
+                      <thead>
+                        <tr>
+                          <th style={{ backgroundColor: '#e67e22' }} className="has-text-white">Unternehmen</th>
+                          <th style={{ backgroundColor: '#e67e22' }} className="has-text-white">Webseite</th>
+                          <th style={{ backgroundColor: '#e67e22' }} className="has-text-white">Email</th>
+                          <th style={{ backgroundColor: '#e67e22' }} className="has-text-white">Beschreibung</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr>
+                          <td>TechSolutions GmbH</td>
+                          <td>techsolutions-gmbh.de</td>
+                          <td>kontakt@techsolutions-gmbh.de</td>
+                          <td>IT-Dienstleister für KMU, spezialisiert auf Cloud-Lösungen und Digitalisierung</td>
+                        </tr>
+                        <tr>
+                          <td>Marketing Plus AG</td>
+                          <td>marketingplus.de</td>
+                          <td>info@marketingplus.de</td>
+                          <td>Full-Service Marketingagentur mit Fokus auf B2B-Marketing und Lead-Generierung</td>
+                        </tr>
+                        <tr>
+                          <td>Innovate Consulting</td>
+                          <td>innovate-consulting.de</td>
+                          <td>kontakt@innovate-consulting.de</td>
+                          <td>Unternehmensberatung für digitale Transformation und Prozessoptimierung</td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                  <p className="has-text-centered mt-4 is-size-6 has-text-grey">
+                    * Dies ist ein Beispiel für das Format der Lead-Liste, die du als CSV-Datei erhältst
+                  </p>
+                </div>
+              </section>
+
               <section className="section py-4">
                 <div className="container">
                   <div className="columns is-centered">
                     <div className="column is-10">
                       <div className="box p-5 has-background-white">
-                        <div className="columns is-vcentered">
-                          <div className="column is-3 has-text-centered">
+                        <div className="columns is-vcentered is-multiline">
+                          <div className="column is-3-desktop is-12-mobile has-text-centered">
                             <figure className="image is-128x128 mx-auto">
                               <img 
                                 src="/chn-profile.gif" 
@@ -442,17 +484,17 @@ function App() {
                             </figure>
                             <h3 className="title is-4 mt-3">Cao Hung Nguyen</h3>
                           </div>
-                          <div className="column is-9">
+                          <div className="column is-9-desktop is-12-mobile">
                             <div className="content has-text-left">
                               <p className="is-size-5 mb-4">
                                 Wenn dir Sophiena gefällt, würde ich mich über jede Weiterempfehlung freuen. Gerne verbinde dich mit mir auf LinkedIn.
                               </p>
-                              <div>
+                              <div className="buttons">
                                 <a
                                   href="https://www.linkedin.com/in/caohungnguyen/"
                                   target="_blank"
                                   rel="noopener noreferrer"
-                                  className="button is-info is-medium is-rounded"
+                                  className="button is-info is-medium is-rounded is-fullwidth-mobile"
                                 >
                                   <span className="icon">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
