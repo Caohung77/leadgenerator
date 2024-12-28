@@ -1155,10 +1155,48 @@
   background-color: var(--primary-color);
   color: white;
   transition: all 0.3s ease;
+  white-space: nowrap;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0 1.5rem;
 }
 
 .button.is-linkedin:hover {
   background-color: #e66a10;
   transform: translateY(-2px);
   box-shadow: 0 4px 15px rgba(255, 126, 35, 0.2);
+}
+
+@media (max-width: 768px) {
+  .linkedin-section {
+    padding: 1rem;
+  }
+
+  .button.is-linkedin {
+    width: 100%;
+    justify-content: center;
+    padding: 0.75rem 1rem;
+    font-size: 0.95rem;
+  }
+
+  .linkedin-section p {
+    font-size: 0.95rem;
+    margin-bottom: 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .linkedin-section {
+    padding: 0.75rem;
+  }
+
+  .button.is-linkedin {
+    padding: 0.5rem 0.75rem;
+    font-size: 0.9rem;
+  }
+
+  .linkedin-section p {
+    font-size: 0.9rem;
+  }
 }
